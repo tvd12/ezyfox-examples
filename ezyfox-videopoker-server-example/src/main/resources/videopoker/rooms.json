@@ -1,0 +1,87 @@
+[
+ {
+	 "name" : "vjob",
+	 "typeId" : 0,
+	 "maxUsers" : 100,
+	 "maxRoomVariablesAllowed" : 10,
+	 "bettingTypes" :
+		 [
+		  {
+			  "id" : 0,
+			  "money" : 1000
+		  },
+		  {
+			  "id" : 1,
+			  "money" : 2000
+		  },
+		  {
+			  "id" : 2,
+			  "money" : 3000
+		  }
+		 ],
+	"payTable" : {
+		"hands" : [
+		 {
+			 "id" : 0,
+			 "payout" : 1,
+			 "name" : "Royal Flush",
+			 "cardIds" : [8, 9, 10, 11, 12]
+		 },
+		 {
+			 "id" : 1,
+			 "payout" : 50,
+			 "name" : "Straight Flush",
+			 "cardIds" : [2, 3, 4, 5, 6]
+		 },
+		 {
+			 "id" : 2,
+			 "payout" : 25,
+			 "name" : "Four of a kind",
+			 "cardIds" : [0, 13, 26, 39]
+		 },
+		 {
+			 "id" : 3,
+			 "payout" : 9,
+			 "name" : "Full House",
+			 "cardIds" : [0, 13, 26, 1, 14]
+		 },
+		 {
+			 "id" : 4,
+			 "payout" : 6,
+			 "name" : "Flush",
+			 "cardIds" : [0, 2, 4, 6, 9]
+		 },
+		 {
+			 "id" : 5,
+			 "payout" : 4,
+			 "name" : "Straight",
+			 "cardIds" : [0, 14, 28, 42, 43]
+		 },
+		 {
+			 "id" : 6,
+			 "payout" : 3,
+			 "name" : "Three of a kind",
+			 "cardIds" : [1, 14, 27]
+		 },
+		 {
+			 "id" : 7,
+			 "payout" : 2,
+			 "name" : "Two Pair",
+			 "cardIds" : [1, 14, 3, 16]
+		 },
+		 {
+			 "id" : 8,
+			 "payout" : 1,
+			 "name" : "Jacks or Better",
+			 "cardIds" : [9, 22]
+		 },
+		 {
+			 "id" : 9,
+			 "payout" : 0,
+			 "name" : "Lose",
+			 "cardIds" : []
+		 }
+		]
+	}
+ }
+]

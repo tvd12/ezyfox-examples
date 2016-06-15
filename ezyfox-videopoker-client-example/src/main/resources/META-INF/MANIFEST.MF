@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Created-By: 1.2 (Young Monkeys)
+Sealed: true
+Name: com/puppet/videopoker/client
+Sealed: false
+Main-Class: com.puppet.videopoker.client.VideoPokerClientApp
