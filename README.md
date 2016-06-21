@@ -56,6 +56,8 @@ hibernate.connection.password=123
 
 Run maven with goals: `clean assembly:directory install`
 
+- Start/Restart smartfox server
+
 - With `ezyfox-videopoker-client-example` project:
 
 Run file `EzyFoxVideoPokerClientApp.java` with java application
