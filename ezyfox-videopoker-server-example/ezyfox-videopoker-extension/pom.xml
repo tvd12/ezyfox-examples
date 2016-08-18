@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.tvd12</groupId>
+		<artifactId>ezyfox-videopoker-server-example</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ezyfox-videopoker-extension</artifactId>
+	<name>ezyfox-videopoker-extension</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.tvd12</groupId>
+			<artifactId>ezyfox-sfs2x</artifactId>
+			<version>${ezyfox.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.smartfoxserver</groupId>
+			<artifactId>sfs2x-v2</artifactId>
+			<version>2.9.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/sfs2x.jar</systemPath>
+		</dependency>
+	</dependencies>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.2.1</version>
+					<configuration>
+						<descriptors>
+							<descriptor>assembly.xml</descriptor>
+						</descriptors>
+					</configuration>
+					<executions>
+						<execution>
+							<id>make-assembly</id>
+							<phase>package</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<!-- Place any Ant task here. You can add anything you can add between 
+									<target> and </target> in a build.xml. -->
+								<delete dir="${deploy.path}/${project.name}"/>
+								<mkdir dir="${deploy.path}/${project.name}"/>
+								<mkdir dir="${deploy.path}/${project.name}/config"/>
+								<copy file="target/${project.name}-${project.version}-bin/${project.name}.zone.xml" todir="${deploy.path}/../zones"/>
+								<!-- <copy todir="${deploy.path}/__resources__"> <fileset dir="target/${project.name}-${project.version}-bin/resources"> 
+									<exclude name="**/.svn" /> <exclude name="**/.git" /> <exclude name="**/*.class" 
+									/> </fileset> </copy> -->
+								<!-- <copy todir="${deploy.path}/${project.name}">
+									<fileset dir="target/${project.name}-${project.version}-bin/lib">
+										<exclude name="**/.svn"/>
+										<exclude name="**/.git"/>
+										<exclude name="**/*.class"/>
+									</fileset>
+								</copy> -->
+								<move file="target/${project.name}-${project.version}-bin/lib/${project.name}-${project.version}.jar" tofile="${deploy.path}/${project.name}/${project.name}-${project.version}-Extension.jar"/>
+								<move file="target/${project.name}-${project.version}-bin/lib/ezyfox-sfs2x-${ezyfox.version}.jar" tofile="${deploy.path}/${directory.lib}/ezyfox-sfs2x-${ezyfox.version}.jar"/>
+								<copy todir="${deploy.path}/${project.name}/config">
+									<fileset dir="target/${project.name}-${project.version}-bin/config">
+										<exclude name="**/.svn"/>
+										<exclude name="**/.git"/>
+										<exclude name="**/*.class"/>
+									</fileset>
+								</copy>
+								<delete dir="${deploy.path}/${project.name}/classes"/>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
