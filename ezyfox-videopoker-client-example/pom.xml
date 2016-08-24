@@ -21,8 +21,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.puppet</groupId>
-			<artifactId>video-poker</artifactId>
+			<groupId>com.tvd12</groupId>
+			<artifactId>ezyfox-videopoker-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>

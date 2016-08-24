@@ -5,13 +5,13 @@ package com.tvd12.ezyfox.videopoker.client.handler;
 
 import java.util.Collection;
 
-import com.lagente.videopoker.card.Card;
-import com.lagente.videopoker.model.Pack;
-import com.lagente.videopoker.model.TurnResult;
-import com.lagente.videopoker.util.CardUtil;
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.tvd12.ezyfox.videopoker.card.Card;
 import com.tvd12.ezyfox.videopoker.client.AppInput;
+import com.tvd12.ezyfox.videopoker.model.Pack;
+import com.tvd12.ezyfox.videopoker.model.TurnResult;
+import com.tvd12.ezyfox.videopoker.util.CardUtil;
 
 /**
  * @author tavandung12
