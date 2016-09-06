@@ -33,7 +33,7 @@ public class DealRequestListener {
         Game game = user.getGame();
         game.deal(room.cardPack(), indexes, room.matcherChain());
         context.command(Response.class).command("4")
-            .recipient(user)
+            .recipients(user)
             .data(game)
             .execute();
         user.setGameMoney((long)(user.getGameMoney() 

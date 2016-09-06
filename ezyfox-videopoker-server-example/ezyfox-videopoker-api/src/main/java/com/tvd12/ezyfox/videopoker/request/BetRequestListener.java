@@ -5,8 +5,6 @@ package com.tvd12.ezyfox.videopoker.request;
 
 import com.tvd12.ezyfox.core.annotation.ClientRequestListener;
 import com.tvd12.ezyfox.core.annotation.ClientResponseHandler;
-import com.tvd12.ezyfox.core.annotation.RequestParam;
-import com.tvd12.ezyfox.core.annotation.ResponseParam;
 import com.tvd12.ezyfox.core.command.Log;
 import com.tvd12.ezyfox.core.command.UpdateBuddyProperties;
 import com.tvd12.ezyfox.core.command.UpdateRoom;
@@ -27,8 +25,6 @@ import lombok.Data;
 @ClientRequestListener(command = "2")
 public class BetRequestListener {
     
-    @RequestParam("1")
-    @ResponseParam("1")
     private int bettingTypeId;
     
     public void execute(AppContext context, VideoPokerRoom room, VideoPokerUser user) {

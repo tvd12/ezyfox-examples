@@ -25,7 +25,7 @@ public class DoubleRequestListener {
         context.command(Response.class)
             .command("5")
             .data(turn)
-            .recipient(user)
+            .recipients(user)
             .execute();
     }
 

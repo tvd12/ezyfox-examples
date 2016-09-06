@@ -31,7 +31,7 @@ public class UserJoinRoomHandler {
                 " playerId = " + context.command(UserInfo.class).user(user).getPlayerId());
         context.command(Response.class)
             .command("1")
-            .recipient(user)
+            .recipients(user)
             .data(room)
             .execute();
         List<ApiBuddy> buddies = context.command(FetchBuddyList.class).user(user).execute();

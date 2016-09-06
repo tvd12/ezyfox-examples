@@ -33,7 +33,7 @@ public class DoubleDealRequestListener {
         context.command(Response.class)
             .command("7")
             .data(turn)
-            .recipient(user)
+            .recipients(user)
             .execute();
         if(turn.getResult() == TurnResult.LOSE) {
             user.resetGameMoney();
