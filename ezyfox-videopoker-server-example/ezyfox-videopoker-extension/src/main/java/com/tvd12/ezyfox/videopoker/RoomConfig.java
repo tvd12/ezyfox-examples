@@ -3,6 +3,7 @@
  */
 package com.tvd12.ezyfox.videopoker;
 
+import com.tvd12.ezyfox.core.annotation.AdditionalClientRequestListeners;
 import com.tvd12.ezyfox.core.annotation.PackagesScan;
 
 /**
@@ -10,8 +11,9 @@ import com.tvd12.ezyfox.core.annotation.PackagesScan;
  *
  */
 @PackagesScan(packages = {
-        "com.tvd12.ezyfox.videopoker.request",
-        "com.tvd12.ezyfox.videopoker.interceptor"})
+        "com.tvd12.ezyfox.videopoker.request"})
+@AdditionalClientRequestListeners({
+        "com.tvd12.ezyfox.videopoker.interceptor.BetRequestInterceptor"})
 public class RoomConfig {
 
 }

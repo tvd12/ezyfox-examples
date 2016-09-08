@@ -5,8 +5,6 @@ package com.tvd12.ezyfox.videopoker.event;
 
 import com.tvd12.ezyfox.core.annotation.ServerEventHandler;
 import com.tvd12.ezyfox.core.command.AddCommand;
-import com.tvd12.ezyfox.core.command.AddObjectDeserializer;
-import com.tvd12.ezyfox.core.command.AddObjectSerializer;
 import com.tvd12.ezyfox.core.constants.ServerEvent;
 import com.tvd12.ezyfox.core.content.AppContext;
 import com.tvd12.ezyfox.db.SessionFactoryProvider;
@@ -14,9 +12,6 @@ import com.tvd12.ezyfox.videopoker.cmd.Welcome;
 import com.tvd12.ezyfox.videopoker.cmd.impl.WelcomeImpl;
 import com.tvd12.ezyfox.videopoker.db.DatabaseContext;
 import com.tvd12.ezyfox.videopoker.entities.VideoPokerUser;
-import com.tvd12.ezyfox.videopoker.mapper.BetRequestDeserializer;
-import com.tvd12.ezyfox.videopoker.mapper.BetRequestSerializer;
-import com.tvd12.ezyfox.videopoker.request.BetRequestListener;
 
 /**
  * @author tavandung12
@@ -34,10 +29,10 @@ public class ServerInitializingHandler {
             .load();
         context.command(AddCommand.class).add(Welcome.class, WelcomeImpl.class);
         
-        context.command(AddObjectSerializer.class)
-            .add(BetRequestListener.class, new BetRequestSerializer());
-        context.command(AddObjectDeserializer.class)
-            .add(BetRequestDeserializer.class, new BetRequestDeserializer());
+//        context.command(AddObjectSerializer.class)
+//            .add(BetRequestListener.class, new BetRequestSerializer());
+//        context.command(AddObjectDeserializer.class)
+//            .add(BetRequestDeserializer.class, new BetRequestDeserializer());
     }
     
 }
