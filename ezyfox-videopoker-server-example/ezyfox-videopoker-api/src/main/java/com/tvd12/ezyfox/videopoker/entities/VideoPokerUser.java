@@ -22,10 +22,9 @@ import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
 
 import com.tvd12.ezyfox.core.annotation.BuddyVariable;
-import com.tvd12.ezyfox.core.annotation.UserAgent;
+import com.tvd12.ezyfox.core.annotation.GameUser;
 import com.tvd12.ezyfox.core.annotation.Variable;
-import com.tvd12.ezyfox.core.entities.ApiBuddyProperties;
-import com.tvd12.ezyfox.core.entities.ApiUser;
+import com.tvd12.ezyfox.core.entities.ApiGameUser;
 import com.tvd12.ezyfox.videopoker.model.Game;
 
 import lombok.Data;
@@ -36,7 +35,7 @@ import lombok.EqualsAndHashCode;
  *
  */
 @Data
-@UserAgent
+@GameUser
 @Entity
 @Cacheable
 @NaturalIdCache
@@ -46,7 +45,14 @@ import lombok.EqualsAndHashCode;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE,
        region = "com.tvd12.ezyfox.videopoker.entities.VideoPokerUser")
 @EqualsAndHashCode(callSuper = false, of = "dbId")
-public class VideoPokerUser extends ApiUser {
+public class VideoPokerUser extends ApiGameUser {
+    
+    @Column(name = "last_login_ip")
+    private String ip;
+    
+    @NaturalId(mutable = false)
+    @Column(name = "name")
+    private String name;
     
     @Variable(name = "1", visible = true)
     @BuddyVariable(name = "1", visible = true)
@@ -69,18 +75,12 @@ public class VideoPokerUser extends ApiUser {
     @Column(name = "id")
     private int dbId;
     
-    @NaturalId(mutable = false)
-    @Column(name = "username")
-    private String name;
-    
-    @Column(name = "last_login_ip")
-    private String ip;
-    
     @Transient
     private Game game;
     
-    public VideoPokerUser() {
-        setBuddyProperties(new ApiBuddyProperties());
+    public void init() {
+        setName(super.getName());
+        setIp(super.getIp());
     }
     
     public void increaseMoney(long offset) {
@@ -108,4 +108,5 @@ public class VideoPokerUser extends ApiUser {
         setDbId(other.getDbId());
         setMoney(other.getMoney());
     }
+    
 }

@@ -10,6 +10,7 @@ import com.tvd12.ezyfox.core.command.Log;
 import com.tvd12.ezyfox.core.constants.ServerEvent;
 import com.tvd12.ezyfox.core.content.AppContext;
 import com.tvd12.ezyfox.core.entities.ApiDisconnection;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 import com.tvd12.ezyfox.videopoker.db.UserRepository;
 import com.tvd12.ezyfox.videopoker.entities.VideoPokerUser;
 
@@ -21,7 +22,8 @@ import com.tvd12.ezyfox.videopoker.entities.VideoPokerUser;
 public class UserDisconnectHandler {
 
     public void handle(AppContext context, ApiDisconnection dis) {
-        VideoPokerUser user = dis.user();
+        ApiUser apiUser = dis.user();
+        VideoPokerUser user = apiUser.getChild(VideoPokerUser.class);
         context.command(Log.class).info("user " + user.getName() + " has disconnected");
         user.setLastLoginTime(new Date());
         user.setLastLogoutTime(new Date());

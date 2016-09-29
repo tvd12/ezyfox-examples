@@ -1,9 +1,11 @@
 /**
  * 
  */
-package com.tvd12.ezyfox.videopoker;
+package com.tvd12.ezyfox.videopoker.config;
 
+import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
 import com.tvd12.ezyfox.core.annotation.PackagesScan;
+import com.tvd12.ezyfox.core.annotation.RoomPackages;
 
 /**
  * @author tavandung12
@@ -14,6 +16,10 @@ import com.tvd12.ezyfox.core.annotation.PackagesScan;
         "com.tvd12.ezyfox.videopoker.event",
         "com.tvd12.ezyfox.videopoker.model"
         })
+@RoomPackages(packages = {
+        "com.tvd12.ezyfox.videopoker"
+})
+@AppContextConfiguration
 public class AppConfig {
 
 }

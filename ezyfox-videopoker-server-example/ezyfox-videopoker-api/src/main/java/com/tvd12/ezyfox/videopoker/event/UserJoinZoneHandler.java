@@ -22,6 +22,7 @@ import com.tvd12.ezyfox.videopoker.entities.VideoPokerUser;
 public class UserJoinZoneHandler {
 
     public void handle(AppContext context, ApiZone zone, VideoPokerUser user) {
+        user.init();
         context.command(Log.class).from(this).info(
                 "user " + user.getName() + 
                 " at ip = " + user.getIp() +
