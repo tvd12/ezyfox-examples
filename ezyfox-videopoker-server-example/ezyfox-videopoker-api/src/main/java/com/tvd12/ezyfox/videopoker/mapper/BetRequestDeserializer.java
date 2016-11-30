@@ -11,14 +11,12 @@ import com.tvd12.ezyfox.videopoker.request.BetRequestListener;
  * @author tavandung12
  *
  */
-public class BetRequestDeserializer implements ObjectDeserializer {
+public class BetRequestDeserializer implements ObjectDeserializer<BetRequestListener> {
 
-    @SuppressWarnings("unchecked")
     @Override
-    public BetRequestListener deserialize(Object object, Parameters params) {
-        BetRequestListener bet = (BetRequestListener)object;
-        bet.setBettingTypeId(params.get("1", int.class));
-        return bet;
+    public BetRequestListener deserialize(BetRequestListener object, Parameters params) {
+        object.setBettingTypeId(params.get("1", int.class));
+        return object;
     }
 
 }

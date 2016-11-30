@@ -12,13 +12,12 @@ import com.tvd12.ezyfox.videopoker.request.BetRequestListener;
  * @author tavandung12
  *
  */
-public class BetRequestSerializer implements ObjectSerializer {
+public class BetRequestSerializer implements ObjectSerializer<BetRequestListener> {
 
     @Override
-    public Parameters serialize(Object object) {
-        BetRequestListener bet = (BetRequestListener)object;
+    public Parameters serialize(BetRequestListener object) {
         Parameters answer = new ParameterWrapper();
-        answer.set("1", bet.getBettingTypeId());
+        answer.set("1", object.getBettingTypeId());
         return answer;
     }
 
