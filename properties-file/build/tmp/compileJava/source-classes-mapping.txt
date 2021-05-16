@@ -1,0 +1,2 @@
+com/tvd12/example/properties_file/PropertiesFile.java
+ com.tvd12.example.properties_file.PropertiesFile

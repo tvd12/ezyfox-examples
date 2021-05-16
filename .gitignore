@@ -1,0 +1,15 @@
+gradle/
+gradlew
+gradlew.bat
+.classpath
+.project
+.settings/
+.iml
+.idea/
+*.classpath
+*.project
+*.settings/
+*.iml
+*.idea/
+.DS_Store
+*.DS_Store

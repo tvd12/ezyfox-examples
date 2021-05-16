@@ -1,0 +1,5 @@
+include:
+  profiles:
+    - cache-alpha
+    - database-alpha
+environment: alpha

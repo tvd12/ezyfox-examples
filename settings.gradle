@@ -1,0 +1,2 @@
+include ':properties-file'
+rootProject.name = 'ezyfox-examples'
