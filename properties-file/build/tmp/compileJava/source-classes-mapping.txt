@@ -1,2 +1,6 @@
+com/tvd12/example/properties_file/ApplicationConfig.java
+ com.tvd12.example.properties_file.ApplicationConfig
+ com.tvd12.example.properties_file.ApplicationConfig$Cache
+ com.tvd12.example.properties_file.ApplicationConfig$Database
 com/tvd12/example/properties_file/PropertiesFile.java
  com.tvd12.example.properties_file.PropertiesFile
