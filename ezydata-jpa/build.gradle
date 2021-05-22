@@ -1,0 +1,8 @@
+dependencies {
+    implementation project(':ezydata-common')
+    implementation 'com.tvd12:ezydata-jpa:' + ezydataVersion
+    implementation 'com.tvd12:ezyhttp-server-boot:' + ezyhttpVersion
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+    implementation 'org.hibernate:hibernate-core:5.4.27.Final'
+    implementation 'mysql:mysql-connector-java:8.0.22'
+}

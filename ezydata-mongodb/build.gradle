@@ -1,0 +1,6 @@
+apply from: '../build-ezydata.gradle'
+
+dependencies {
+    implementation project(':ezydata-common')
+    implementation 'com.tvd12:ezydata-mongodb:' + ezydataVersion
+}

@@ -1,2 +1,6 @@
 include ':properties-file'
+include ':ezydata-common'
+include ':ezydata-jpa'
+include ':ezydata-mongodb'
+include ':ezydata-redis'
 rootProject.name = 'ezyfox-examples'

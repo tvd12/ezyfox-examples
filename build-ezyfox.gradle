@@ -1,0 +1,4 @@
+dependencies {
+    implementation 'com.tvd12:ezyfox-bean:' + ezyfoxVersion
+    implementation 'com.tvd12:ezyfox-binding:' + ezyfoxVersion
+}

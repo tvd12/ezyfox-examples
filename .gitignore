@@ -1,3 +1,9 @@
+target/
+*/target/
+**/target/
+build/
+*/build/
+**/build/
 *.gradle/
 .gradle/
 .gradle/**
