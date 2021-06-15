@@ -5,23 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-public class Category {
+@EqualsAndHashCode(of = "id", callSuper = false)
+public class Category extends CommonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    
-    public Category(String name) {
-    	this.name = name;
-    }
 }

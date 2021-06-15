@@ -1,7 +1,8 @@
 package com.tvd12.ezydata.example.jpa.request;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,6 @@ public class AddBookRequest {
     private Long authorId;
     private String bookName;
     private BigDecimal price;
-    private Date releaseDate;
-    private Date releaseTime;
+    private LocalDate releaseDate;
+    private LocalDateTime releaseTime;
 }

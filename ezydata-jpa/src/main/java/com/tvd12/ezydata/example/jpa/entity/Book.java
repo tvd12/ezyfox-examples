@@ -9,17 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book {
+@EqualsAndHashCode(of = "id", callSuper = false)
+public class Book extends CommonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,20 +26,4 @@ public class Book {
     private BigDecimal price;
     private LocalDate releaseDate;
     private LocalDateTime releaseTime;
-    
-    public Book(
-		Long categoryId,
-	    Long authorId,
-	    String name,
-	    BigDecimal price,
-	    LocalDate releaseDate,
-	    LocalDateTime releaseTime
-    ) {
-    	this.categoryId = categoryId;
-    	this.authorId = authorId;
-    	this.name = name;
-    	this.price = price;
-    	this.releaseDate = releaseDate;
-    	this.releaseTime = releaseTime;
-    }
 }

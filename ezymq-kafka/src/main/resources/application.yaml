@@ -1,0 +1,7 @@
+kafka:
+  producers:
+    hello-world:
+      topic: hello-world
+  consumers:
+    hello-world:
+      topic: hello-world

@@ -8,6 +8,7 @@ allprojects {
     version '1.0.0'
 
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 }
@@ -19,6 +20,7 @@ subprojects {
     sourceCompatibility = 1.8
 
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 

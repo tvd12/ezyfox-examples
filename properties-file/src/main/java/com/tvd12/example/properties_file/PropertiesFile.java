@@ -1,6 +1,7 @@
 package com.tvd12.example.properties_file;
 
 import com.tvd12.properties.file.mapping.PropertiesMapper;
+import com.tvd12.properties.file.reader.BaseFileReader;
 import com.tvd12.properties.file.reader.MultiFileReader;
 
 import java.util.Properties;
@@ -22,7 +23,7 @@ public class PropertiesFile {
             .map(ApplicationConfig.class);
         System.out.println("applicationConfig alpha: " + applicationConfig);
 
-        Properties yamlProperties = new MultiFileReader()
+        Properties yamlProperties = new BaseFileReader()
             .read("application.yaml");
         System.out.println("yaml properties: " + yamlProperties);
 
