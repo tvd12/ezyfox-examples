@@ -10,6 +10,7 @@ import com.tvd12.ezydata.example.jpa.data.BookData;
 import com.tvd12.ezydata.example.jpa.request.AddBookRequest;
 import com.tvd12.ezydata.example.jpa.response.BookResponse;
 import com.tvd12.ezydata.example.jpa.service.BookService;
+import com.tvd12.ezydata.example.jpa.validator.BookValidator;
 import com.tvd12.ezyhttp.server.core.annotation.Controller;
 import com.tvd12.ezyhttp.server.core.annotation.DoGet;
 import com.tvd12.ezyhttp.server.core.annotation.DoPost;
@@ -22,12 +23,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller("/api/v1")
 public class BookController {
+    private final BookValidator bookValidator;
     private final BookService bookService;
     private final RequestToDataConverter requestToDataConverter;
     private final DataToResponseConverter dataToResponseConverter;
 
     @DoPost("/book/add")
     public BookResponse addBook(@RequestBody AddBookRequest request) {
+        bookValidator.validate(request);
         final AddBookData addBookData = requestToDataConverter.toData(request);
         final BookData bookData = bookService.addBook(addBookData);
         return dataToResponseConverter.toResponse(bookData);
