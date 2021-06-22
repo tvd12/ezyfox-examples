@@ -1,0 +1,3 @@
+dependencies {
+    implementation 'com.tvd12:ezymq-kafka:' + ezymqVersion
+}
