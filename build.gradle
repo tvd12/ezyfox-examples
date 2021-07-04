@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
+    id 'jacoco'
 }
 
 allprojects {
@@ -16,6 +17,7 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
+    apply plugin: 'jacoco'
 
     sourceCompatibility = 1.8
 
@@ -31,11 +33,15 @@ subprojects {
         compileOnly 'org.projectlombok:lombok:1.18.20'
         annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
+        testImplementation 'com.tvd12:test-util:' + testUtilVersion
+
+        testImplementation 'org.mockito:mockito-junit-jupiter:3.11.2'
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     }
 
     test {
         useJUnitPlatform()
+        finalizedBy jacocoTestReport
     }
 }

@@ -6,6 +6,8 @@ import lombok.*;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id", callSuper = false)
 public class Author extends CommonEntity {
     @Id

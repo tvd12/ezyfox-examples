@@ -9,6 +9,8 @@ import lombok.*;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id", callSuper = false)
 public class Category extends CommonEntity {
     @Id

@@ -3,7 +3,8 @@
 <suite name="AllTests">
 	<test name="All">
 		<packages>
-			<package name="com.tvd12.ezydata.database.test"></package>
+			<package name="com.tvd12.ezydata.example.jpa.test"></package>
+			<package name="com.tvd12.ezydata.example.jpa.test.service"></package>
 		</packages>
 	</test>
 </suite>
