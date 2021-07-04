@@ -9,6 +9,7 @@ import com.tvd12.ezydata.example.jpa.data.CategoryData;
 import com.tvd12.ezydata.example.jpa.entity.Author;
 import com.tvd12.ezydata.example.jpa.entity.Book;
 import com.tvd12.ezydata.example.jpa.entity.Category;
+import com.tvd12.ezydata.example.jpa.exception.DuplicatedBookException;
 import com.tvd12.ezydata.example.jpa.repository.AuthorRepository;
 import com.tvd12.ezydata.example.jpa.repository.BookRepository;
 import com.tvd12.ezydata.example.jpa.repository.CategoryRepository;
@@ -20,7 +21,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static com.tvd12.test.assertion.Asserts.assertThat;
+import static com.tvd12.test.assertion.Asserts.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -131,6 +132,41 @@ public class BookServiceTest {
 
         verify(entityToDataConverter, times(1)).toData(
             book, author, category
+        );
+        validateMockitoUsage();
+    }
+
+    @Test
+    public void addBookFailedDueToBookRepository() {
+        // given
+        final AddBookData addBookData = randomAddBookData();
+
+        final Book book = new Book(
+            RandomUtil.randomLong(),
+            addBookData.getCategoryId(),
+            addBookData.getAuthorId(),
+            addBookData.getBookName(),
+            addBookData.getPrice(),
+            addBookData.getReleaseDate(),
+            addBookData.getReleaseTime()
+        );
+
+        when(
+            bookRepository.findByNameAndAuthorId(
+                addBookData.getBookName(),
+                addBookData.getAuthorId()
+            )
+        ).thenReturn(book);
+
+        // when
+        final Throwable throwable = assertThrows(() -> sut.addBook(addBookData));
+
+        // then
+        assertTrue(throwable instanceof DuplicatedBookException);
+
+        verify(bookRepository, times(1)).findByNameAndAuthorId(
+            addBookData.getBookName(),
+            addBookData.getAuthorId()
         );
         validateMockitoUsage();
     }
