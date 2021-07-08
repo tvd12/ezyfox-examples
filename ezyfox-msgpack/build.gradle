@@ -1,0 +1,4 @@
+dependencies {
+    implementation 'com.tvd12:ezyfox-binding-codec:' + ezyfoxVersion
+    implementation 'com.tvd12:ezyfox-msgpack:' + ezyfoxVersion
+}
