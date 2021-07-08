@@ -20,10 +20,15 @@ public class MsgpackExample {
             .messageSerializer(new MsgPackSimpleSerializer())
             .messageDeserializer(new MsgPackSimpleDeserializer())
             .build();
-        Transfer transfer = new Transfer(300, 100);
+        final Transfer transfer = new Transfer(300, 100);
+
         final byte[] serializedBytes = codec.serialize(transfer);
+
         System.out.println(serializedBytes.length);
         System.out.println(Arrays.toString(serializedBytes));
         System.out.println(EzyPrints.printHex(serializedBytes));
+
+        final Transfer deserializedObj = codec.deserialize(serializedBytes, Transfer.class);
+        System.out.println(deserializedObj);
     }
 }
