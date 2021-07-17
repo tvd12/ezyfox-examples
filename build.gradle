@@ -33,6 +33,7 @@ subprojects {
         compileOnly 'org.projectlombok:lombok:1.18.20'
         annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
+        testImplementation 'com.tvd12:ezyfox-tools:' + ezyfoxVersion
         testImplementation 'com.tvd12:test-util:' + testUtilVersion
 
         testImplementation 'org.mockito:mockito-junit-jupiter:3.11.2'
