@@ -4,11 +4,15 @@ curl --location --request POST 'http://localhost:8080/api/v1/author/add' \
     "authorName": "Dzung"
 }'
 
+curl --location --request GET 'http://localhost:8080/api/v1/author/1'
+
 curl --location --request POST 'http://localhost:8080/api/v1/category/add' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "categoryName": "Java"
 }'
+
+curl --location --request GET 'http://localhost:8080/api/v1/category/1'
 
 curl --location --request POST 'http://localhost:8080/api/v1/book/add' \
 --header 'Content-Type: application/json' \

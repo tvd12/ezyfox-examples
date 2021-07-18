@@ -1,5 +1,6 @@
 package com.tvd12.ezydata.example.jpa.service;
 
+import com.tvd12.ezydata.example.jpa.exception.CategoryNotFoundException;
 import com.tvd12.ezydata.example.jpa.exception.DuplicatedCategoryException;
 import com.tvd12.ezydata.example.jpa.converter.DataToEntityConverter;
 import com.tvd12.ezydata.example.jpa.converter.EntityToDataConverter;
@@ -24,6 +25,14 @@ public class CategoryService {
         }
         final Category entity = dataToEntityConverter.toEntity(data);
         categoryRepository.save(entity);
+        return entityToDataConverter.toData(entity);
+    }
+
+    public CategoryData getCategory(long categoryId) {
+        final Category entity = categoryRepository.findById(categoryId);
+        if (entity == null) {
+            throw new CategoryNotFoundException("not found category with id: " + categoryId);
+        }
         return entityToDataConverter.toData(entity);
     }
 }
