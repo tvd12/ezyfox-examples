@@ -36,6 +36,14 @@ curl --location --request POST 'http://localhost:8080/api/v1/book/add' \
     "categoryId": 1
 }'
 
+curl --location --request POST 'http://localhost:8080/api/v1/book/add/1000'
+
+curl --location --request GET 'http://localhost:8080/api/v1/book/list'
+
+curl --location --request GET 'http://localhost:8080/api/v1/book/list-by-offset?offset=15990&limit=10'
+
+curl --location --request GET 'http://localhost:8080/api/v1/book/list-by-cursor?next_page_token=1742160938:15095&limit=10'
+
 curl --location --request GET 'http://localhost:8080/api/v1/books/1'
 
 curl --location --request GET 'http://localhost:8080/api/v1/books?size=30'

@@ -2,8 +2,10 @@ package com.tvd12.ezydata.example.jpa.converter;
 
 import com.tvd12.ezydata.example.jpa.data.AuthorData;
 import com.tvd12.ezydata.example.jpa.data.BookData;
+import com.tvd12.ezydata.example.jpa.data.BookRawData;
 import com.tvd12.ezydata.example.jpa.data.CategoryData;
 import com.tvd12.ezydata.example.jpa.response.AuthorResponse;
+import com.tvd12.ezydata.example.jpa.response.BookRawResponse;
 import com.tvd12.ezydata.example.jpa.response.BookResponse;
 import com.tvd12.ezydata.example.jpa.response.CategoryResponse;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
@@ -48,4 +50,22 @@ public class DataToResponseConverter {
 			.map(this::toResponse)
 			.collect(Collectors.toList());
     }
+
+	public BookRawResponse toResponse(BookRawData bookData) {
+		return BookRawResponse.builder()
+			.bookId(bookData.getId())
+			.bookName(bookData.getName())
+			.authorId(bookData.getAuthorId())
+			.categoryId(bookData.getCategoryId())
+			.price(bookData.getPrice())
+			.releaseDate(bookData.getReleaseDate())
+			.releaseTime(bookData.getReleaseTime())
+			.build();
+	}
+
+	public List<BookRawResponse> toRawResponseList(List<BookRawData> dataList) {
+		return dataList.stream()
+			.map(this::toResponse)
+			.collect(Collectors.toList());
+	}
 }
