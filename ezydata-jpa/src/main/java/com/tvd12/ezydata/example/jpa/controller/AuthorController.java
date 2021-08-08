@@ -8,9 +8,7 @@ import com.tvd12.ezydata.example.jpa.request.AddAuthorRequest;
 import com.tvd12.ezydata.example.jpa.response.AuthorResponse;
 import com.tvd12.ezydata.example.jpa.service.AuthorService;
 import com.tvd12.ezydata.example.jpa.validator.AuthorValidator;
-import com.tvd12.ezyhttp.server.core.annotation.Controller;
-import com.tvd12.ezyhttp.server.core.annotation.DoPost;
-import com.tvd12.ezyhttp.server.core.annotation.RequestBody;
+import com.tvd12.ezyhttp.server.core.annotation.*;
 
 import lombok.AllArgsConstructor;
 
@@ -30,4 +28,9 @@ public class AuthorController {
         return dataToResponseConverter.toResponse(authorData);
     }
 
+    @DoGet("/{authorId}")
+    public AuthorResponse getAuthor(@PathVariable long authorId) {
+        final AuthorData authorData = authorService.getAuthor(authorId);
+        return dataToResponseConverter.toResponse(authorData);
+    }
 }

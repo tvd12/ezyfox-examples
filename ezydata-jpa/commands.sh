@@ -4,11 +4,15 @@ curl --location --request POST 'http://localhost:8080/api/v1/author/add' \
     "authorName": "Dzung"
 }'
 
+curl --location --request GET 'http://localhost:8080/api/v1/author/1'
+
 curl --location --request POST 'http://localhost:8080/api/v1/category/add' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "categoryName": "Java"
 }'
+
+curl --location --request GET 'http://localhost:8080/api/v1/category/1'
 
 curl --location --request POST 'http://localhost:8080/api/v1/book/add' \
 --header 'Content-Type: application/json' \
@@ -31,6 +35,14 @@ curl --location --request POST 'http://localhost:8080/api/v1/book/add' \
     "bookName": "Java In Action",
     "categoryId": 1
 }'
+
+curl --location --request POST 'http://localhost:8080/api/v1/book/add/1000'
+
+curl --location --request GET 'http://localhost:8080/api/v1/book/list'
+
+curl --location --request GET 'http://localhost:8080/api/v1/book/list-by-offset?offset=15990&limit=10'
+
+curl --location --request GET 'http://localhost:8080/api/v1/book/list-by-cursor?next_page_token=1742160938:15095&limit=10'
 
 curl --location --request GET 'http://localhost:8080/api/v1/books/1'
 

@@ -1,5 +1,6 @@
 package com.tvd12.ezydata.example.jpa.repository;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import com.tvd12.ezydata.database.EzyDatabaseRepository;
@@ -16,6 +17,21 @@ public interface BookRepository extends EzyDatabaseRepository<Long, Book> {
 
     @EzyQuery("select e from Book e")
     List<Book> findBooks(Next next);
+
+    @EzyQuery("select e from Book e order by e.price desc, e.id desc")
+    List<Book> findBooksOrderByPriceAndId(Next next);
+
+    @EzyQuery(
+        value = "select * from book e " +
+            "where e.price > ?0 or (e.price = ?0 and e.id > ?1) " +
+            "order by e.price desc, e.id desc",
+        nativeQuery = true
+    )
+    List<Book> findBooks(
+        BigInteger priceExclusive,
+        long idExclusive,
+        Next next
+    );
 
     @EzyQuery("select e from Book e where e.name < ?0 order by e.name")
     List<Book> findByNameLt(String name, Next next);

@@ -1,6 +1,7 @@
 package com.tvd12.ezydata.example.jpa.converter;
 
 import com.tvd12.ezydata.example.jpa.data.AuthorData;
+import com.tvd12.ezydata.example.jpa.data.BookRawData;
 import com.tvd12.ezydata.example.jpa.data.CategoryData;
 import com.tvd12.ezydata.example.jpa.entity.Author;
 import com.tvd12.ezydata.example.jpa.entity.Book;
@@ -57,4 +58,22 @@ public class EntityToDataConverter {
 	        )
 		).collect(Collectors.toList());
     }
+
+	public BookRawData toData(Book book) {
+		return BookRawData.builder()
+			.id(book.getId())
+			.name(book.getName())
+			.authorId(book.getAuthorId())
+			.categoryId(book.getCategoryId())
+			.price(book.getPrice())
+			.releaseDate(book.getReleaseDate())
+			.releaseTime(book.getReleaseTime())
+			.build();
+	}
+
+	public List<BookRawData> toDataList(List<Book> books) {
+		return books.stream()
+			.map(this::toData)
+			.collect(Collectors.toList());
+	}
 }

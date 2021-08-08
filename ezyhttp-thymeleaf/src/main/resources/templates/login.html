@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Login View</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  </head>
+
+  <body>
+    <div class="container">
+      <form action="/login" method="post">
+        <input name="username" placeholder="Username" value="DungTV" />
+        <input name="password" placeholder="Password" value="12345678" />
+        <input name="lastLoginDate" placeholder="Last login date" value="2021-08-31" />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </body>
+
+</html>
