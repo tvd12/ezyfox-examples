@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>EzyHTTH View</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  </head>
+
+  <body>
+    <h3 th:text="${'Welcome ' + user.username}"></h3>
+    <label>Birth of Date: </label><label th:text="${user.birthOfDate}"></label>
+    <label>Register Time: </label><label th:text="${user.registerTime}"></label>
+  
+  </body>
+
+</html>
