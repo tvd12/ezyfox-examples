@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 public class AccessToken extends BaseEntity {
     @Id
     private String accessToken;
-    private String idToken;
     private long userId;
     private LocalDateTime expireAt;
     private LocalDateTime expireIn;

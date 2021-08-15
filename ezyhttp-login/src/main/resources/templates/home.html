@@ -5,69 +5,19 @@
 <head>
     <title>EzyHTTH View</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="google-signin-client_id"
-          content="727082225298-t2a9uvfl7s7bog99pl0u17b8mgdppl7k.apps.googleusercontent.com">
     <!-- BS style -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- BS JavaScript -->
     <script th:src="@{/js/bootstrap.min.js}"></script>
-    <!-- Google JavaScript -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body>
 
-<p th:text="#{home.welcome}">Welcome to EzyHTTP!</p>
-<div class="g-signin2" data-onsuccess="onSignIn">Login</div>
-<a href="#" onclick="signOut();">Sign out</a>
+<p>Welcome to EzyHTTP!</p>
+<p th:text="${email}"></p>
+<a th:href="@{'/logout?accessToken=' + ${accessToken}}">Sign out</a>
 </body>
-
-<script>
-    function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-            console.log('User signed out.');
-        });
-    }
-
-    function onSignIn(googleUser) {
-    console.log(googleUser);
-        var profile = googleUser.getBasicProfile();
-        var authResponse = googleUser.getAuthResponse();
-        var data = {
-            accessToken : authResponse.access_token,
-            expiresAt : authResponse.expires_at,
-            expiresIn : authResponse.expires_in,
-            firstIssuedAt : authResponse.first_issued_at,
-            idToken : authResponse.id_token,
-            emailAddress : profile.getEmail(),
-            imageProfileUrl : profile.getImageUrl(),
-            firstName : profile.getGivenName(),
-            lastName : profile.getFamilyName(),
-            userName : profile.getEmail(),
-        };
-        console.log(googleUser);
-        $.ajax({
-            url: '/verify-access-token',
-            type: 'post',
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (res) {
-                console.log(res);
-                if(res.status == 300) {
-                    var url = "http://localhost:8080/update-infor?accessToken=" + res.accessToken;
-                    window.location.href = url;
-                } else if (res.status == 200) {
-                    window.location.href = "http://localhost:8080/login-google-success";
-                }
-            },
-            data: JSON.stringify(data)
-        });
-    }
-
-
-</script>
 </html>
 
