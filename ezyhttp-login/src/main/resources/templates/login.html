@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- BS style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- BS JavaScript -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+<form name='login-form' th:action="@{/login}" method='POST'>
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td><input type='text' name='email' value=''></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type='password' name='password'/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Login"/></td>
+        </tr>
+    </table>
+</form>
+<a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/login-callback&response_type=code
+    &client_id=727082225298-t2a9uvfl7s7bog99pl0u17b8mgdppl7k.apps.googleusercontent.com&approval_prompt=force">Login
+    With Gmail</a>
+</body>
+
+<script>
+
+    window.onload = function() {
+        const accessToken = localStorage.getItem('accessToken');
+        if (accessToken != null) {
+            window.location.href = 'http://localhost:8080/home?accessToken=' + accessToken;
+        }
+    };
+
+</script>
+
+</html>

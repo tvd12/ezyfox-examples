@@ -6,8 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -15,16 +14,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name = "user_information")
 @EqualsAndHashCode(of = "id", callSuper = false)
-public class UserInformation {
+public class UserInformation extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String email;
     private String fullName;
-    private String thirdPartyId;
+    private String firstName;
+    private String lastName;
     private String avatarURL;
-    private LocalDate birthOfDate;
+    private Date birthOfDate;
     private AccountType accountType;
-    private LocalDateTime registerTime;
-    private LocalDateTime lastUpdatedTime;
+    private int gender;
+    private String password;
 }

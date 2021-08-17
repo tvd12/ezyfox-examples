@@ -2,16 +2,35 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-  <head>
+<head>
     <title>EzyHTTH View</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-  </head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- BS style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- BS JavaScript -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
 
-  <body>
-  
-    <p th:text="#{home.welcome}">Welcome to EzyHTTP!</p>
-  
-  </body>
+<body>
+
+<p>Welcome to EzyHTTP!</p>
+<p th:text="${email}"></p>
+<button onclick="signOut()">Sign out</button>
+</body>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        var accessToken = /*[[${accessToken}]]*/;
+    /*]]>*/
+    localStorage.setItem('accessToken', accessToken);
+
+    function signOut() {
+        localStorage.removeItem('accessToken');
+        window.location.href = 'http://localhost:8080/logout?accessToken=' + accessToken;
+    }
+</script>
 
 </html>
+

@@ -1,0 +1,46 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Employee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h2>Employee Registration</h2>
+            <form th:action="@{/save}" th:object="${userInformation}" method="post">
+                <input name="id" type="hidden" th:value="*{id}" th:field="*{id}">
+                <input name="accessToken" type="hidden" th:value="${accessToken}" th:field="${accessToken}">
+                <div class="form-row">
+                    <div class="col-md-6 form-group">
+                        <label>FirstName</label>
+                        <input name="firstName" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>LastName</label>
+                        <input name="lastName" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Password</label>
+                        <input name="password" type="password" class="form-control">
+                    </div>
+                    <div class="col-md-6 form-group">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        var accessToken = /*[[${accessToken}]]*/;
+    /*]]>*/
+    localStorage.setItem('accessToken', accessToken);
+</script>
+</html>
