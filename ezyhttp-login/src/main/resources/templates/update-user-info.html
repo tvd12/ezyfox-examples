@@ -37,4 +37,10 @@
     </div>
 </div>
 </body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        var accessToken = /*[[${accessToken}]]*/;
+    /*]]>*/
+    localStorage.setItem('accessToken', accessToken);
+</script>
 </html>

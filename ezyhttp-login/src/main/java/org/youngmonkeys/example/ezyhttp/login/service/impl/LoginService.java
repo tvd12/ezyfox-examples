@@ -1,4 +1,4 @@
-package org.youngmonkeys.example.ezyhttp.login.service.iplm;
+package org.youngmonkeys.example.ezyhttp.login.service.impl;
 
 import com.google.api.services.oauth2.model.Userinfo;
 import com.tvd12.ezyfox.annotation.EzyProperty;
@@ -8,17 +8,17 @@ import com.tvd12.ezyfox.sercurity.EzySHA256;
 import org.youngmonkeys.example.ezyhttp.login.entity.AccessToken;
 import org.youngmonkeys.example.ezyhttp.login.entity.AccountType;
 import org.youngmonkeys.example.ezyhttp.login.entity.UserInformation;
+import org.youngmonkeys.example.ezyhttp.login.exception.TokenExpiredException;
+import org.youngmonkeys.example.ezyhttp.login.exception.TokenNotFoundException;
 import org.youngmonkeys.example.ezyhttp.login.repository.AccessTokenRepository;
 import org.youngmonkeys.example.ezyhttp.login.repository.UserInformationRepository;
 import org.youngmonkeys.example.ezyhttp.login.request.UpdateUserRequest;
-import org.youngmonkeys.example.ezyhttp.login.service.IUserInformationService;
+import org.youngmonkeys.example.ezyhttp.login.service.ILoginService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @EzySingleton
-public class UserInformationService implements IUserInformationService {
+public class LoginService implements ILoginService {
 
     @EzyProperty("access_token.expires_in")
     private int ExpireIn;
@@ -30,19 +30,14 @@ public class UserInformationService implements IUserInformationService {
     private AccessTokenRepository accessTokenRepository;
 
     @Override
-    public UserInformation getUserInfoByAccessToken(String accessToken) {
-        AccessToken accessTokenObj = accessTokenRepository.findByField("accessToken", accessToken);
-        if (accessTokenObj != null && accessTokenObj.getExpireIn().compareTo(LocalDateTime.now()) == 1) {
-            UserInformation userInformation = userInformationRepository.findById(accessTokenObj.getUserId());
-            return userInformation;
-        }
-        return null;
-    }
-
-    @Override
     public UserInformation getUserInfoByEmail(String email) {
         UserInformation userInformation = userInformationRepository.findByField("email", email);
         return userInformation;
+    }
+
+    @Override
+    public UserInformation getUserById(long userId) {
+        return userInformationRepository.findById(userId);
     }
 
     @Override
@@ -67,9 +62,8 @@ public class UserInformationService implements IUserInformationService {
 
     @Override
     public boolean saveUserInformation(UpdateUserRequest request) {
-        AccessToken accessTokenObj = accessTokenRepository.findByField("accessToken", request.getAccessToken());
-        if (accessTokenObj != null && accessTokenObj.getExpireIn().compareTo(LocalDateTime.now()) == 1) {
-            UserInformation userInformation = userInformationRepository.findById(request.getId());
+        UserInformation userInformation = userInformationRepository.findById(request.getId());
+        if (userInformation != null) {
             userInformation.setFullName(request.getFirstName() + " " + request.getLastName());
             userInformation.setFirstName(request.getFirstName());
             userInformation.setLastName(request.getLastName());

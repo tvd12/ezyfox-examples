@@ -6,14 +6,15 @@ import com.tvd12.ezyhttp.server.core.annotation.DoGet;
 import com.tvd12.ezyhttp.server.core.annotation.RequestParam;
 import com.tvd12.ezyhttp.server.core.view.Redirect;
 import com.tvd12.ezyhttp.server.core.view.View;
+import org.youngmonkeys.example.ezyhttp.login.annotation.UserId;
 import org.youngmonkeys.example.ezyhttp.login.entity.UserInformation;
-import org.youngmonkeys.example.ezyhttp.login.service.iplm.UserInformationService;
+import org.youngmonkeys.example.ezyhttp.login.service.impl.LoginService;
 
 @Controller
 public class HomeController {
 
     @EzyAutoBind
-    private UserInformationService userInformationService;
+    private LoginService loginService;
 
     @DoGet("/")
     public View index() {
@@ -22,9 +23,16 @@ public class HomeController {
             .build();
     }
 
+    @DoGet("/login")
+    public View login() {
+        return View.builder()
+                .template("login")
+                .build();
+    }
+
     @DoGet("/home")
-    public Object home(@RequestParam String accessToken) {
-        UserInformation userInformation = userInformationService.getUserInfoByAccessToken(accessToken);
+    public Object home(@UserId long userId, @RequestParam String accessToken) {
+        UserInformation userInformation = loginService.getUserById(userId);
         if (userInformation != null) {
             return View.builder()
                     .addVariable("email", userInformation.getEmail())

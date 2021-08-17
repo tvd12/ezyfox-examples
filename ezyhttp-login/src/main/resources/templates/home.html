@@ -17,7 +17,20 @@
 
 <p>Welcome to EzyHTTP!</p>
 <p th:text="${email}"></p>
-<a th:href="@{'/logout?accessToken=' + ${accessToken}}">Sign out</a>
+<button onclick="signOut()">Sign out</button>
 </body>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        var accessToken = /*[[${accessToken}]]*/;
+    /*]]>*/
+    localStorage.setItem('accessToken', accessToken);
+
+    function signOut() {
+        localStorage.removeItem('accessToken');
+        window.location.href = 'http://localhost:8080/logout?accessToken=' + accessToken;
+    }
+</script>
+
 </html>
 
