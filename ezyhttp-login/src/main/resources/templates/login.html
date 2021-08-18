@@ -35,14 +35,17 @@
 </body>
 
 <script>
+    /*<![CDATA[*/
+        var fromScratch = /*[[${fromScratch}]]*/ 'false';
+    /*]]>*/
 
-    window.onload = function() {
-        const accessToken = localStorage.getItem('accessToken');
-        if (accessToken != null) {
-            window.location.href = 'http://localhost:8080/home?accessToken=' + accessToken;
-        }
-    };
-
+    if(fromScratch) {
+        localStorage.removeItem('accessToken');
+    }
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken != null) {
+        window.location.href = 'http://localhost:8080/home?accessToken=' + accessToken;
+    }
 </script>
 
 </html>

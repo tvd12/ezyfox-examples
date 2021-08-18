@@ -7,14 +7,15 @@ import com.tvd12.ezyhttp.server.core.annotation.RequestParam;
 import com.tvd12.ezyhttp.server.core.view.Redirect;
 import com.tvd12.ezyhttp.server.core.view.View;
 import org.youngmonkeys.example.ezyhttp.login.annotation.UserId;
-import org.youngmonkeys.example.ezyhttp.login.entity.UserInformation;
-import org.youngmonkeys.example.ezyhttp.login.service.impl.LoginService;
+import org.youngmonkeys.example.ezyhttp.login.entity.User;
+import org.youngmonkeys.example.ezyhttp.login.entity.UserStatus;
+import org.youngmonkeys.example.ezyhttp.login.service.impl.UserService;
 
 @Controller
 public class HomeController {
 
     @EzyAutoBind
-    private LoginService loginService;
+    private UserService loginService;
 
     @DoGet("/")
     public View index() {
@@ -23,24 +24,19 @@ public class HomeController {
             .build();
     }
 
-    @DoGet("/login")
-    public View login() {
-        return View.builder()
-                .template("login")
-                .build();
-    }
-
     @DoGet("/home")
     public Object home(@UserId long userId, @RequestParam String accessToken) {
-        UserInformation userInformation = loginService.getUserById(userId);
-        if (userInformation != null) {
-            return View.builder()
-                    .addVariable("email", userInformation.getEmail())
-                    .addVariable("accessToken", accessToken)
-                    .template("home")
-                    .build();
-        } else {
+        User user = loginService.getUserById(userId);
+        if (user == null) {
             return Redirect.to("/");
         }
+        if (user.getStatus() == UserStatus.REGISTER) {
+            return Redirect.to("/user/update?accessToken=" + accessToken);
+        }
+        return View.builder()
+            .addVariable("email", user.getEmail())
+            .addVariable("accessToken", accessToken)
+            .template("home")
+            .build();
     }
 }

@@ -13,17 +13,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
-
-// Base of entity
 public class BaseEntity {
     // create time
-    private LocalDateTime createTime;
+    private LocalDateTime createTime = LocalDateTime.now();
     // update time
-    private LocalDateTime updateTime;
+    private LocalDateTime updateTime = LocalDateTime.now();
     // delete flg
-    private Boolean deleted = false;
-    // version
-    private int version;
-    // deleted date
-    private LocalDateTime deleteDate;
+    private Boolean deleted;
 }

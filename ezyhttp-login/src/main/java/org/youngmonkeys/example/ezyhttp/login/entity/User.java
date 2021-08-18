@@ -12,9 +12,9 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user_information")
+@Table(name = "user")
 @EqualsAndHashCode(of = "id", callSuper = false)
-public class UserInformation extends BaseEntity {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -27,4 +27,5 @@ public class UserInformation extends BaseEntity {
     private AccountType accountType;
     private int gender;
     private String password;
+    private UserStatus status;
 }

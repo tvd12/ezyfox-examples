@@ -24,11 +24,21 @@
     /*<![CDATA[*/
         var accessToken = /*[[${accessToken}]]*/;
     /*]]>*/
+
     localStorage.setItem('accessToken', accessToken);
 
     function signOut() {
         localStorage.removeItem('accessToken');
-        window.location.href = 'http://localhost:8080/logout?accessToken=' + accessToken;
+        $.ajax({
+            type: 'POST',
+            url: '/logout',
+            headers: {
+                'accessToken': accessToken
+            }
+        })
+        .done(function(data) {
+            window.location.href = 'http://localhost:8080/login?from_scratch=true';
+        });
     }
 </script>
 
