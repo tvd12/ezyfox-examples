@@ -44,7 +44,10 @@ public class LoginController {
             String hashPassword = EzySHA256.cryptUtfToLowercase(loginRequest.getPassword());
              if (hashPassword.equals(user.getPassword())) {
                  String accessToken = authenticationService.generateAccessToken(user.getId());
-                 return Redirect.to("home?accessToken=" + accessToken);
+                 return Redirect.builder()
+                     .addCookie("accessToken", accessToken)
+                     .uri("/home")
+                     .build();
              }
         }
         return Redirect.to("/login-error");
@@ -76,12 +79,15 @@ public class LoginController {
         }
         String accessToken = authenticationService.generateAccessToken(user.getId());
         return userExisted && user.getStatus() == UserStatus.UPDATED
-            ? Redirect.to("/home?accessToken=" + accessToken)
-            : Redirect.to("/user/update?accessToken=" + accessToken);
+            ? Redirect.builder()
+                .uri("/home")
+                .addCookie("accessToken", accessToken)
+                .build()
+            : Redirect.to("/user/update");
     }
 
     @DoPost("/logout")
-    public Object logout(@RequestParam String accessToken) {
+    public Object logout(@RequestCookie("accessToken") String accessToken) {
         authenticationService.removeAccessToken(accessToken);
         return Redirect.to("/");
     }

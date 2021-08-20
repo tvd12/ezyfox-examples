@@ -19,7 +19,10 @@ public class UserController {
     private IUserService userService;
 
     @DoGet("/user/update")
-    public View userUpdateGet(@UserId long userId, @RequestParam String accessToken) {
+    public View userUpdateGet(
+        @UserId long userId,
+        @RequestCookie("accessToken") String accessToken
+    ) {
         User user = userService.getUserById(userId);
         return View.builder()
                 .addVariable("user", user)
@@ -43,6 +46,9 @@ public class UserController {
         user.setStatus(UserStatus.UPDATED);
         user.setPassword(EzySHA256.cryptUtfToLowercase(request.getPassword()));
         userService.saveUser(user);
-        return Redirect.to("/home?accessToken=" + request.getAccessToken());
+        return Redirect.builder()
+            .uri("/home")
+            .addCookie("accessToken", request.getAccessToken())
+            .build();
     }
 }

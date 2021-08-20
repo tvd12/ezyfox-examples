@@ -47,7 +47,9 @@ public class PermissionInterceptor extends EzyLoggable implements RequestInterce
         if (accessToken == null) {
             accessToken = arguments.getHeader("accessToken");
         }
-
+        if (accessToken == null) {
+            accessToken = arguments.getCookieValue("accessToken");
+        }
         long userId = authenticationService.verifyAccessToken(accessToken);
         arguments.setArgument(UserId.class, userId);
 

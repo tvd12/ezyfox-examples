@@ -12,13 +12,14 @@ import org.youngmonkeys.example.ezyhttp.login.exception.UserNotFoundException;
 public class GlobalExceptionHandler extends EzyLoggable {
 
     @TryCatch({TokenExpiredException.class, TokenNotFoundException.class})
-    public Redirect handleAccessTokenException() {
-        return Redirect.to("login");
+    public Redirect handleAccessTokenException(RuntimeException e) {
+        logger.info("token error", e);
+        return Redirect.to("/login");
     }
 
     @TryCatch(UserNotFoundException.class)
     public Redirect handleUserNotFoundException(UserNotFoundException e) {
-        logger.debug("user not found", e);
+        logger.info("user not found", e);
         return Redirect.to("/login?from_scratch=true");
     }
 }
