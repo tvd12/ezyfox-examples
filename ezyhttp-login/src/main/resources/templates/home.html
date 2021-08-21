@@ -19,21 +19,9 @@
 
 <p>Welcome to EzyHTTP!</p>
 <p th:text="${email}"></p>
-<button onclick="signOut()">Sign out</button>
+<form action="/logout" method="post">
+    <button type="submit">Sign out</button>
+</form>
 </body>
-
-<script th:inline="javascript">
-    function signOut() {
-        $.ajax({
-            type: 'POST',
-            url: '/logout'
-        })
-        .done(function(data) {
-            removeCookie('accessToken');
-            window.location.href = 'http://localhost:8080/login';
-        });
-    }
-</script>
-
 </html>
 

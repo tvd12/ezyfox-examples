@@ -91,6 +91,9 @@ public class LoginController {
     @DoPost("/logout")
     public Object logout(@RequestCookie("accessToken") String accessToken) {
         authenticationService.removeAccessToken(accessToken);
-        return Redirect.to("/");
+        return Redirect.builder()
+            .uri("/")
+            .addCookie("accessToken", "")
+            .build();
     }
 }
