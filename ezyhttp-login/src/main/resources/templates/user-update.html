@@ -12,8 +12,7 @@
     <div class="row">
         <div class="col-md-8 mx-auto">
             <h2>Employee Registration</h2>
-            <form th:action="@{/save}" th:object="${userInformation}" method="post">
-                <input name="id" type="hidden" th:value="*{id}" th:field="*{id}">
+            <form th:action="@{/user/save}" th:object="${user}" method="post">
                 <input name="accessToken" type="hidden" th:value="${accessToken}" th:field="${accessToken}">
                 <div class="form-row">
                     <div class="col-md-6 form-group">

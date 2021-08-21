@@ -11,8 +11,7 @@ import java.io.IOException;
  */
 public interface IGoogleService {
 
-    Userinfo getUserInfoByAccessToken(String accessToken) throws Exception;
+    Userinfo getUserInfoByAccessToken(String accessToken);
 
-    String getAccessToken(String code) throws IOException;
-
+    String getAccessToken(String code);
 }

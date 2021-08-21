@@ -3,20 +3,18 @@ CREATE DATABASE `test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_09
 -- create table access_token
 CREATE TABLE IF NOT EXISTS `access_token` (
 	`accessToken` VARCHAR(256) NOT NULL,
-	`idToken` VARCHAR(256) NOT NULL,
+	`userId` BIGINT,
 	`firstIssueAt` DATETIME,
 	`expireAt` DATETIME,
 	`expireIn` DATETIME,
-	`userId` BIGINT,
     `createTime` DATETIME,
     `updateTime` DATETIME,
-     `deleted` TINYINT,
-	`version` INT,
+    `deleted` TINYINT,
 	PRIMARY KEY (`accessToken`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- create table user_information
-CREATE TABLE IF NOT EXISTS `user_information` (
+-- create table user
+CREATE TABLE IF NOT EXISTS `user` (
 	`id` BIGINT NOT NULL AUTO_INCREMENT,
 	`lastName` VARCHAR(45),
 	`gender` INT,
@@ -30,6 +28,17 @@ CREATE TABLE IF NOT EXISTS `user_information` (
 	`createTime` DATETIME,
     `updateTime` DATETIME,
     `deleted` TINYINT,
-    `version` INT,
+    `status` VARCHAR(10),
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- create table user_data
+CREATE TABLE IF NOT EXISTS `user_data` (
+	`userId` BIGINT NOT NULL,
+	`data_key` VARCHAR(45),
+	`data_value` VARCHAR(256),
+	`createTime` DATETIME,
+    `updateTime` DATETIME,
+    `deleted` TINYINT,
+	PRIMARY KEY (`userId`, `data_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

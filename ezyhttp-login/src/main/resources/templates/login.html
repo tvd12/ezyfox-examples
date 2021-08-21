@@ -17,12 +17,12 @@
 <form name='login-form' th:action="@{/login}" method='POST'>
     <table>
         <tr>
-            <td>Username:</td>
-            <td><input type='text' name='email' value=''></td>
+            <td>Email:</td>
+            <td><input type='text' name='email' placeholder="Email"></td>
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input type='password' name='password'/></td>
+            <td><input type='password' name='password' placeholder="Password"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Login"/></td>
@@ -35,14 +35,17 @@
 </body>
 
 <script>
+    /*<![CDATA[*/
+        var fromScratch = /*[[${fromScratch}]]*/ 'false';
+    /*]]>*/
 
-    window.onload = function() {
-        const accessToken = localStorage.getItem('accessToken');
-        if (accessToken != null) {
-            window.location.href = 'http://localhost:8080/home?accessToken=' + accessToken;
-        }
-    };
-
+    if(fromScratch) {
+        localStorage.removeItem('accessToken');
+    }
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken != null) {
+        window.location.href = 'http://localhost:8080/home?accessToken=' + accessToken;
+    }
 </script>
 
 </html>

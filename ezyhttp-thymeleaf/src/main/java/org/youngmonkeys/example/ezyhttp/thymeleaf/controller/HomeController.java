@@ -5,7 +5,7 @@ import com.tvd12.ezyhttp.server.core.annotation.DoGet;
 import com.tvd12.ezyhttp.server.core.view.Redirect;
 
 @Controller
-public class HomController {
+public class HomeController {
 
     @DoGet("/")
     public Redirect home() {
