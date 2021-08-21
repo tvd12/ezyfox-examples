@@ -18,27 +18,21 @@ public class HomeController {
     private UserService loginService;
 
     @DoGet("/")
-    public View index() {
-        return View.builder()
-            .template("login")
-            .build();
+    public Object index() {
+        return Redirect.to("/home");
     }
 
     @DoGet("/home")
-    public Object home(
-        @UserId long userId,
-        @RequestCookie("accessToken") String accessToken
-    ) {
+    public Object home(@UserId long userId) {
         User user = loginService.getUserById(userId);
         if (user == null) {
-            return Redirect.to("/");
+            return Redirect.to("/login");
         }
         if (user.getStatus() == UserStatus.REGISTER) {
             return Redirect.to("/user/update");
         }
         return View.builder()
             .addVariable("email", user.getEmail())
-            .addVariable("accessToken", accessToken)
             .template("home")
             .build();
     }

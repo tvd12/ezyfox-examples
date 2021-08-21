@@ -30,10 +30,9 @@ public class LoginController {
     private IAuthenticationService authenticationService;
 
     @DoGet("/login")
-    public View loginGet(@RequestParam("from_scratch") Boolean fromScratch) {
+    public View loginGet() {
         return View.builder()
             .template("login")
-            .addVariable("fromScratch", fromScratch == null || fromScratch)
             .build();
     }
 
@@ -83,12 +82,18 @@ public class LoginController {
                 .uri("/home")
                 .addCookie("accessToken", accessToken)
                 .build()
-            : Redirect.to("/user/update");
+            : Redirect.builder()
+                .uri("/user/update")
+                .addCookie("accessToken", accessToken)
+                .build();
     }
 
     @DoPost("/logout")
     public Object logout(@RequestCookie("accessToken") String accessToken) {
         authenticationService.removeAccessToken(accessToken);
-        return Redirect.to("/");
+        return Redirect.builder()
+            .uri("/")
+            .addCookie("accessToken", "")
+            .build();
     }
 }

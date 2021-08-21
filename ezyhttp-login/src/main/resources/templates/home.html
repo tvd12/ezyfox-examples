@@ -11,33 +11,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- BS JavaScript -->
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Main JavaScript -->
+    <script th:src="@{/js/main.js}"></script>
 </head>
 
 <body>
 
 <p>Welcome to EzyHTTP!</p>
 <p th:text="${email}"></p>
-<button onclick="signOut()">Sign out</button>
+<form action="/logout" method="post">
+    <button type="submit">Sign out</button>
+</form>
 </body>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-        var accessToken = /*[[${accessToken}]]*/;
-    /*]]>*/
-
-    localStorage.setItem('accessToken', accessToken);
-
-    function signOut() {
-        localStorage.removeItem('accessToken');
-        $.ajax({
-            type: 'POST',
-            url: '/logout'
-        })
-        .done(function(data) {
-            window.location.href = 'http://localhost:8080/login?from_scratch=true';
-        });
-    }
-</script>
-
 </html>
 
