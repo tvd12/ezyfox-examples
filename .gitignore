@@ -1,3 +1,4 @@
+*-no-commit*
 target/
 */target/
 **/target/
@@ -22,3 +23,4 @@ gradlew.bat
 *.idea/
 .DS_Store
 *.DS_Store
+.yaml

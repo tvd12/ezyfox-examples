@@ -2,9 +2,13 @@ apply from: '../build-ezydata.gradle'
 
 dependencies {
     implementation 'com.tvd12:ezyhttp-server-thymeleaf:' + ezyhttpVersion
+    implementation 'com.tvd12:ezyhttp-client:' + ezyhttpVersion
     implementation 'com.tvd12:ezydata-jpa:' + ezydataVersion
     implementation 'com.tvd12:ezyhttp-server-boot:' + ezyhttpVersion
     implementation 'javax.persistence:javax.persistence-api:2.2'
     implementation 'org.hibernate:hibernate-core:5.4.27.Final'
     implementation 'mysql:mysql-connector-java:8.0.22'
+    implementation 'com.google.api-client:google-api-client:1.32.1'
+    implementation 'org.apache.httpcomponents:fluent-hc:4.5.13'
+    implementation 'com.google.apis:google-api-services-oauth2:v2-rev157-1.25.0'
 }

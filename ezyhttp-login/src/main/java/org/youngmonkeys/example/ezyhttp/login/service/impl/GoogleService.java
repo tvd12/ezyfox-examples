@@ -1,0 +1,96 @@
+package org.youngmonkeys.example.ezyhttp.login.service.impl;
+
+import com.google.api.client.auth.oauth2.BearerToken;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.services.oauth2.Oauth2;
+import com.google.api.services.oauth2.model.Userinfo;
+import com.tvd12.ezyfox.annotation.EzyProperty;
+import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
+import com.tvd12.ezyfox.bean.annotation.EzySingleton;
+import com.tvd12.ezyfox.util.EzyLoggable;
+import com.tvd12.ezyfox.util.EzyMapBuilder;
+import com.tvd12.ezyhttp.client.HttpClientProxy;
+import com.tvd12.ezyhttp.client.request.PostRequest;
+import com.tvd12.ezyhttp.client.request.RequestEntity;
+import com.tvd12.ezyhttp.core.constant.ContentTypes;
+import org.youngmonkeys.example.ezyhttp.login.service.IGoogleService;
+
+import java.util.Map;
+
+/**
+ * Implement class of interface google login service
+ */
+@EzySingleton
+public class GoogleService extends EzyLoggable implements IGoogleService {
+
+    @EzyProperty("google.verify_url")
+    private String verifyUrl;
+
+    @EzyProperty("google.client_id")
+    private String clientId;
+
+    @EzyProperty("google.secret_key")
+    private String secretKey;
+
+    @EzyProperty("google.redirect_uri")
+    private String redirectUri;
+
+    @EzyProperty("google.get_token_uri")
+    private String getTokenUri;
+
+    @EzyProperty("google.get_user_info_uri")
+    private String getUserInfoUri;
+
+    @EzyAutoBind
+    private HttpClientProxy httpClientProxy;
+
+    private static final int DEFAULT_GOOGLE_AUTH_TIMEOUT = 15 * 1000;
+
+    @Override
+    public Userinfo getUserInfoByAccessToken(String accessTokenStr) {
+        Credential credential = new Credential(BearerToken.authorizationHeaderAccessMethod())
+            .setAccessToken(accessTokenStr);
+        Oauth2 oauth2 = new Oauth2.Builder(new NetHttpTransport(), new GsonFactory(), credential)
+            .setApplicationName("Oauth2")
+            .build();
+        try {
+            return oauth2.userinfo().get().execute();
+        }
+        catch (Exception e) {
+            logger.info("get google user information by access token error", e);
+            return null;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public String getAccessToken(String code) {
+        Map<String, Object> requestBody = EzyMapBuilder.mapBuilder()
+            .put("client_id", clientId)
+            .put("client_secret", secretKey)
+            .put("redirect_uri", redirectUri)
+            .put("code", code)
+            .put("grant_type", "authorization_code")
+            .build();
+        PostRequest request = new PostRequest()
+            .setURL(getTokenUri)
+            .setEntity(
+                RequestEntity.builder()
+                    .contentType(ContentTypes.APPLICATION_X_WWW_FORM_URLENCODED)
+                    .body(requestBody)
+                    .build()
+            )
+            .setResponseType(Map.class);
+        try {
+            Map<String, Object> response = httpClientProxy.call(request, DEFAULT_GOOGLE_AUTH_TIMEOUT);
+            return (String) response.get("access_token");
+        }
+        catch (Exception e) {
+            logger.info("get google access token error", e);
+            return null;
+        }
+    }
+
+}

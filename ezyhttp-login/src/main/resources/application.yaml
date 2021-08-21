@@ -3,9 +3,15 @@ resources:
 server:
   port: 8080
 datasource:
-  jdbcUrl: jdbc:mysql://root:12345678@localhost:3306/test
   driverClassName: com.mysql.cj.jdbc.Driver
 hibernate:
   show_sql: true
   format_sql: true
   dialect: org.hibernate.dialect.MySQLDialect
+google:
+  client_id: 727082225298-t2a9uvfl7s7bog99pl0u17b8mgdppl7k.apps.googleusercontent.com
+  redirect_uri: http://localhost:8080/login-callback
+  get_token_uri: https://accounts.google.com/o/oauth2/token
+  get_user_info_uri: https://www.googleapis.com/oauth2/v1/userinfo?access_token=
+access_token:
+  expires_in: 3600
