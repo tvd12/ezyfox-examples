@@ -19,14 +19,10 @@ public class UserController {
     private IUserService userService;
 
     @DoGet("/user/update")
-    public View userUpdateGet(
-        @UserId long userId,
-        @RequestCookie("accessToken") String accessToken
-    ) {
+    public View userUpdateGet(@UserId long userId) {
         User user = userService.getUserById(userId);
         return View.builder()
                 .addVariable("user", user)
-                .addVariable("accessToken", accessToken)
                 .template("user-update")
                 .build();
     }
@@ -48,7 +44,6 @@ public class UserController {
         userService.saveUser(user);
         return Redirect.builder()
             .uri("/home")
-            .addCookie("accessToken", request.getAccessToken())
             .build();
     }
 }

@@ -10,6 +10,7 @@ import org.youngmonkeys.example.ezyhttp.login.annotation.UserId;
 import org.youngmonkeys.example.ezyhttp.login.controller.HomeController;
 import org.youngmonkeys.example.ezyhttp.login.controller.LoginController;
 import org.youngmonkeys.example.ezyhttp.login.controller.UserController;
+import org.youngmonkeys.example.ezyhttp.login.exception.TokenNotFoundException;
 import org.youngmonkeys.example.ezyhttp.login.request.UpdateUserRequest;
 import org.youngmonkeys.example.ezyhttp.login.service.IAuthenticationService;
 
@@ -27,9 +28,9 @@ public class PermissionInterceptor extends EzyLoggable implements RequestInterce
     public PermissionInterceptor() {
         try {
             authorizedMethods = Sets.newHashSet(
-                HomeController.class.getDeclaredMethod("home", long.class, String.class),
+                HomeController.class.getDeclaredMethod("home", long.class),
                 LoginController.class.getDeclaredMethod("logout", String.class),
-                UserController.class.getDeclaredMethod("userUpdateGet", long.class, String.class),
+                UserController.class.getDeclaredMethod("userUpdateGet", long.class),
                 UserController.class.getDeclaredMethod("userSavePost", long.class, UpdateUserRequest.class)
             );
         } catch (Exception e) {
@@ -49,6 +50,9 @@ public class PermissionInterceptor extends EzyLoggable implements RequestInterce
         }
         if (accessToken == null) {
             accessToken = arguments.getCookieValue("accessToken");
+        }
+        if (accessToken == null) {
+            throw new TokenNotFoundException("Can not get accessToken from cookie");
         }
         long userId = authenticationService.verifyAccessToken(accessToken);
         arguments.setArgument(UserId.class, userId);

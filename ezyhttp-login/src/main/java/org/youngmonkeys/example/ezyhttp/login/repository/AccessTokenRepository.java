@@ -10,8 +10,4 @@ import java.util.List;
 
 @EzyRepository
 public interface AccessTokenRepository extends EzyDatabaseRepository<String, AccessToken> {
-    List<AccessToken> findByExpireAtAndFirstIssueAt(LocalDateTime expireAt, LocalDateTime firstIssueAt);
-
-    @EzyQuery(value = "Select count(e) from AccessToken e Where e.userId = ?0", nativeQuery = true)
-    int countByUserId(long userId);
 }

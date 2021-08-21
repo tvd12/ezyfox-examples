@@ -11,6 +11,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- BS JavaScript -->
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Main JavaScript -->
+    <script th:src="@{/js/main.js}"></script>
 </head>
 
 <body>
@@ -35,16 +37,9 @@
 </body>
 
 <script>
-    /*<![CDATA[*/
-        var fromScratch = /*[[${fromScratch}]]*/ 'false';
-    /*]]>*/
-
-    if(fromScratch) {
-        localStorage.removeItem('accessToken');
-    }
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken != null) {
-        window.location.href = 'http://localhost:8080/home?accessToken=' + accessToken;
+    const accessToken = getCookie("accessToken");
+    if (accessToken != null && accessToken != '') {
+        window.location.href = 'http://localhost:8080/home';
     }
 </script>
 
