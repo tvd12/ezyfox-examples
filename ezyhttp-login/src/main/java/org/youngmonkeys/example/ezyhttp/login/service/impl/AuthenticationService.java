@@ -32,7 +32,6 @@ public class AuthenticationService implements IAuthenticationService {
         else if (accessTokenObj.getExpireIn().isBefore(now)) {
             throw new TokenExpiredException("token: " + accessToken + " expired");
         }
-        System.out.println("accessToken: " + accessTokenObj);
         return accessTokenObj.getUserId();
     }
 
