@@ -3,7 +3,6 @@ package org.youngmonkeys.example.ezyhttp.login.controller;
 import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyhttp.server.core.annotation.Controller;
 import com.tvd12.ezyhttp.server.core.annotation.DoGet;
-import com.tvd12.ezyhttp.server.core.annotation.RequestCookie;
 import com.tvd12.ezyhttp.server.core.view.Redirect;
 import com.tvd12.ezyhttp.server.core.view.View;
 import org.youngmonkeys.example.ezyhttp.login.annotation.UserId;
