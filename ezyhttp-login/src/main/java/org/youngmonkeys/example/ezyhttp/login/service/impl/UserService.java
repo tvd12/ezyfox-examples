@@ -3,13 +3,10 @@ package org.youngmonkeys.example.ezyhttp.login.service.impl;
 import com.google.api.services.oauth2.model.Userinfo;
 import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
-import com.tvd12.ezyfox.sercurity.EzySHA256;
 import org.youngmonkeys.example.ezyhttp.login.entity.AccountType;
 import org.youngmonkeys.example.ezyhttp.login.entity.User;
 import org.youngmonkeys.example.ezyhttp.login.entity.UserStatus;
-import org.youngmonkeys.example.ezyhttp.login.exception.UserNotFoundException;
 import org.youngmonkeys.example.ezyhttp.login.repository.UserRepository;
-import org.youngmonkeys.example.ezyhttp.login.request.UpdateUserRequest;
 import org.youngmonkeys.example.ezyhttp.login.service.IUserService;
 
 import java.time.LocalDateTime;
