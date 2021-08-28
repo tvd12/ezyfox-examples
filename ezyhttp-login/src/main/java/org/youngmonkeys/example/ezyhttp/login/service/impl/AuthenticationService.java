@@ -5,9 +5,12 @@ import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
 import com.tvd12.ezyfox.sercurity.EzySHA256;
 import org.youngmonkeys.example.ezyhttp.login.entity.AccessToken;
+import org.youngmonkeys.example.ezyhttp.login.entity.User;
 import org.youngmonkeys.example.ezyhttp.login.exception.TokenExpiredException;
 import org.youngmonkeys.example.ezyhttp.login.exception.TokenNotFoundException;
+import org.youngmonkeys.example.ezyhttp.login.exception.UserNotFoundException;
 import org.youngmonkeys.example.ezyhttp.login.repository.AccessTokenRepository;
+import org.youngmonkeys.example.ezyhttp.login.repository.UserRepository;
 import org.youngmonkeys.example.ezyhttp.login.service.IAuthenticationService;
 
 import java.time.LocalDateTime;
@@ -22,6 +25,9 @@ public class AuthenticationService implements IAuthenticationService {
     @EzyAutoBind
     private AccessTokenRepository accessTokenRepository;
 
+    @EzyAutoBind
+    private UserRepository userRepository;
+
     @Override
     public long verifyAccessToken(String accessToken) {
         LocalDateTime now = LocalDateTime.now();
@@ -31,6 +37,10 @@ public class AuthenticationService implements IAuthenticationService {
         }
         else if (accessTokenObj.getExpireIn().isBefore(now)) {
             throw new TokenExpiredException("token: " + accessToken + " expired");
+        }
+        User user = userRepository.findById(accessTokenObj.getUserId());
+        if (user == null) {
+            throw new UserNotFoundException("user id: " + accessTokenObj.getUserId() + " not found");
         }
         return accessTokenObj.getUserId();
     }

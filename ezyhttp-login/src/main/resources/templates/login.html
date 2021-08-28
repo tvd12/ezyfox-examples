@@ -5,35 +5,56 @@
 <head>
     <title>Login page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!-- BS style -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- BS JavaScript -->
-    <script th:src="@{/js/bootstrap.min.js}"></script>
     <!-- Main JavaScript -->
     <script th:src="@{/js/main.js}"></script>
+    <!-- Main style-->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!--    semantic ui-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+            integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 
 <body>
-<form name='login-form' th:action="@{/login}" method='POST'>
-    <table>
-        <tr>
-            <td>Email:</td>
-            <td><input type='text' name='email' placeholder="Email"></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password' placeholder="Password"/></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Login"/></td>
-        </tr>
-    </table>
-</form>
-<a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/login-callback&response_type=code
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        <h2 class="ui image header">
+            <div class="content">
+                Log-in to your account
+            </div>
+        </h2>
+        <form name='login-form' th:action="@{/login}" method='POST' class="ui large form">
+            <div class="ui stacked secondary  segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="email" placeholder="E-mail address">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                </div>
+                <button type="submit" class="ui fluid large teal submit button">Login</button>
+            </div>
+        </form>
+
+        <div class="ui message grid">
+                <div class="eight wide column"><i class="google icon"></i> <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/login-callback&response_type=code
     &client_id=727082225298-t2a9uvfl7s7bog99pl0u17b8mgdppl7k.apps.googleusercontent.com&approval_prompt=force">Login
-    With Gmail</a>
+                    With Gmail</a></div>
+                <div class="eight wide column"><i class="facebook icon"></i><a href="">Login
+                    With Facebook</a></div>
+        </div>
+    </div>
+</div>
 </body>
 
 <script>
@@ -41,6 +62,7 @@
     if (accessToken != null && accessToken != '') {
         window.location.href = 'http://localhost:8080/home';
     }
+
 </script>
 
 </html>
