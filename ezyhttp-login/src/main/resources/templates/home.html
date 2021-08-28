@@ -5,23 +5,31 @@
 <head>
     <title>EzyHTTH View</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!-- BS style -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- BS JavaScript -->
-    <script th:src="@{/js/bootstrap.min.js}"></script>
     <!-- Main JavaScript -->
     <script th:src="@{/js/main.js}"></script>
+    <!-- Main style-->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!--    semantic ui-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+            integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 
 <body>
-
-<p>Welcome to EzyHTTP!</p>
-<p th:text="${email}"></p>
-<form action="/logout" method="post">
-    <button type="submit">Sign out</button>
-</form>
+<div class="ui middle center aligned grid" style="margin-top: 20px">
+    <div class="column">
+        <p>Welcome to EzyHTTP!</p>
+        <p th:text="${email}"></p>
+        <form action="/logout" method="post">
+            <button class="ui fluid small teal submit button" type="submit">Sign out</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
 

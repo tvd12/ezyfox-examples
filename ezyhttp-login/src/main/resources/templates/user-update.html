@@ -1,38 +1,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create New Employee</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <title>Update user information</title>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Main JavaScript -->
+    <script th:src="@{/js/main.js}"></script>
+    <!-- Main style-->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!--    semantic ui-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+            integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
-<div class="container my-3">
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <h2>Employee Registration</h2>
-            <form th:action="@{/user/save}" th:object="${user}" method="post">
-                <div class="form-row">
-                    <div class="col-md-6 form-group">
-                        <label>FirstName</label>
-                        <input name="firstName" type="text" class="form-control">
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>LastName</label>
-                        <input name="lastName" type="text" class="form-control">
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>Password</label>
-                        <input name="password" type="password" class="form-control">
-                    </div>
-                    <div class="col-md-6 form-group">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block mt-3">Save</button>
-            </form>
+<div class="ui text container" style="margin-top: 20px; max-width: 450px">
+    <h2>Update user information</h2>
+    <form class="ui form" th:action="@{/user/save}" method="post">
+        <div class="field">
+            <label>First Name</label>
+            <input name="firstName" type="text" placeholder="First Name">
         </div>
-    </div>
+        <div class="field">
+            <label>Last Name</label>
+            <input name="lastName" type="text" placeholder="Last Name">
+        </div>
+        <div class="field">
+            <label>Password</label>
+            <input name="password" type="password" placeholder="Password">
+        </div>
+        <button class="ui fluid middle teal submit button" type="submit">Save</button>
+    </form>
 </div>
 </body>
 </html>
