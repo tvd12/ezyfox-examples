@@ -10,7 +10,7 @@ public interface IUserService {
 
     User getUserById(long userId);
 
-    User getUserByThirdPartyId(String thirdPartyId);
+    User getUserByFacebookId(String facebookId);
 
     User saveGoogleUserInfo(Userinfo googleUserInfo);
 

@@ -24,6 +24,4 @@ public class UserData extends BaseEntity {
 
     @Column(name = "data_value")
     private String value;
-
-    private String thirdPartyId;
 }
