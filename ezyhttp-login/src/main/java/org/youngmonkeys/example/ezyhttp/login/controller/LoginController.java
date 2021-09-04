@@ -9,10 +9,7 @@ import com.tvd12.ezyhttp.server.core.view.View;
 import org.youngmonkeys.example.ezyhttp.login.entity.User;
 import org.youngmonkeys.example.ezyhttp.login.entity.UserStatus;
 import org.youngmonkeys.example.ezyhttp.login.request.LoginRequest;
-import org.youngmonkeys.example.ezyhttp.login.service.IAuthenticationService;
-import org.youngmonkeys.example.ezyhttp.login.service.IGoogleService;
-import org.youngmonkeys.example.ezyhttp.login.service.IUserDataService;
-import org.youngmonkeys.example.ezyhttp.login.service.IUserService;
+import org.youngmonkeys.example.ezyhttp.login.service.*;
 
 @Controller
 public class LoginController {
@@ -25,6 +22,9 @@ public class LoginController {
 
     @EzyAutoBind
     private IGoogleService googleService;
+
+    @EzyAutoBind
+    private IFacebookService facebookService;
 
     @EzyAutoBind
     private IAuthenticationService authenticationService;
@@ -59,15 +59,15 @@ public class LoginController {
             .build();
     }
 
-    @DoGet("/login-callback")
+    @DoGet("/google-login-callback")
     public Object loginWithGoogle(@RequestParam String code) {
         String googleAccessToken = googleService.getAccessToken(code);
         if (googleAccessToken == null) {
-            return Redirect.to("login-error");
+            return Redirect.to("/login-error");
         }
         Userinfo googleUserInfo = googleService.getUserInfoByAccessToken(googleAccessToken);
         if (googleUserInfo == null) {
-            return Redirect.to("login-error");
+            return Redirect.to("/login-error");
         }
         boolean userExisted = true;
         User user = userService.getUserInfoByEmail(googleUserInfo.getEmail());
@@ -86,6 +86,35 @@ public class LoginController {
                 .uri("/user/update")
                 .addCookie("accessToken", accessToken)
                 .build();
+    }
+
+    @DoGet("/facebook-login-callback")
+    public Object loginWithFacebook(@RequestParam String code) {
+        String facebookAccessToken = facebookService.getAccessToken(code);
+        if (facebookAccessToken == null) {
+            return Redirect.to("/login-error");
+        }
+        com.restfb.types.User userFacebook = facebookService.getUserInfoByAccessToken(facebookAccessToken);
+        if (userFacebook == null) {
+            return Redirect.to("/login-error");
+        }
+        boolean userExisted = true;
+        User user = userService.getUserByThirdPartyId(userFacebook.getId());
+        if (user == null) {
+            userExisted = false;
+            user = userService.saveFacebookUserInfo(userFacebook);
+            userDataService.saveFacebookToken(user.getId(), facebookAccessToken);
+        }
+        String accessToken = authenticationService.generateAccessToken(user.getId());
+        return userExisted && user.getStatus() == UserStatus.UPDATED
+                ? Redirect.builder()
+                    .uri("/home")
+                    .addCookie("accessToken", accessToken)
+                    .build()
+                : Redirect.builder()
+                    .uri("/user/update")
+                    .addCookie("accessToken", accessToken)
+                    .build();
     }
 
     @DoPost("/logout")

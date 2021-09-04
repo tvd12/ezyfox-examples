@@ -28,4 +28,5 @@ public class User extends BaseEntity {
     private int gender;
     private String password;
     private UserStatus status;
+    private String thirdPartyId;
 }
