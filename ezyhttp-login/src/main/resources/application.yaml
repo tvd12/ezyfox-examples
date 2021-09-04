@@ -10,8 +10,13 @@ hibernate:
   dialect: org.hibernate.dialect.MySQLDialect
 google:
   client_id: 727082225298-t2a9uvfl7s7bog99pl0u17b8mgdppl7k.apps.googleusercontent.com
-  redirect_uri: http://localhost:8080/login-callback
+  redirect_uri: http://localhost:8080/google-login-callback
   get_token_uri: https://accounts.google.com/o/oauth2/token
   get_user_info_uri: https://www.googleapis.com/oauth2/v1/userinfo?access_token=
+facebook:
+  client_id: 4517132868352140
+  redirect_uri: http://localhost:8080/facebook-login-callback
+  get_token_url: https://graph.facebook.com/v11.0/oauth/access_token
+  get_user_info_uri: https://graph.facebook.com/me
 access_token:
   expires_in: 3600

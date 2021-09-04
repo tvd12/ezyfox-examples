@@ -10,7 +10,11 @@ public interface IUserService {
 
     User getUserById(long userId);
 
+    User getUserByFacebookId(String facebookId);
+
     User saveGoogleUserInfo(Userinfo googleUserInfo);
+
+    User saveFacebookUserInfo(com.restfb.types.User user);
 
     void saveUser(User user);
 }

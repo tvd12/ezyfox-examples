@@ -47,11 +47,13 @@
         </form>
 
         <div class="ui message grid">
-                <div class="eight wide column"><i class="google icon"></i> <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/login-callback&response_type=code
+            <div class="eight wide column"><i class="google icon"></i>
+                <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/google-login-callback&response_type=code
     &client_id=727082225298-t2a9uvfl7s7bog99pl0u17b8mgdppl7k.apps.googleusercontent.com&approval_prompt=force">Login
-                    With Gmail</a></div>
-                <div class="eight wide column"><i class="facebook icon"></i><a href="">Login
-                    With Facebook</a></div>
+                With Gmail</a></div>
+            <div class="eight wide column"><i class="facebook icon"></i>
+                <a href="https://www.facebook.com/dialog/oauth?client_id=4517132868352140&redirect_uri=http://localhost:8080/facebook-login-callback">Login
+                With Facebook</a></div>
         </div>
     </div>
 </div>
@@ -62,6 +64,7 @@
     if (accessToken != null && accessToken != '') {
         window.location.href = 'http://localhost:8080/home';
     }
+
 
 </script>
 
