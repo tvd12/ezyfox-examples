@@ -26,11 +26,13 @@ public class UserDataService implements IUserDataService {
     }
 
     @Override
-    public void saveFacebookToken(long userId, String facebookToken) {
+    public void saveFacebookToken(long userId, String facebookToken, String facebookId) {
         UserData userData = new UserData();
         userData.setUserId(userId);
         userData.setKey(FACEBOOK_TOKEN_KEY);
         userData.setValue(facebookToken);
+        userData.setThirdPartyId(facebookId);
         userDataRepository.save(userData);
     }
+
 }

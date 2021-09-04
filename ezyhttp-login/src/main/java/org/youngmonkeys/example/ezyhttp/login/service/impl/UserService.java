@@ -5,7 +5,10 @@ import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
 import org.youngmonkeys.example.ezyhttp.login.entity.AccountType;
 import org.youngmonkeys.example.ezyhttp.login.entity.User;
+import org.youngmonkeys.example.ezyhttp.login.entity.UserData;
 import org.youngmonkeys.example.ezyhttp.login.entity.UserStatus;
+import org.youngmonkeys.example.ezyhttp.login.exception.UserNotFoundException;
+import org.youngmonkeys.example.ezyhttp.login.repository.UserDataRepository;
 import org.youngmonkeys.example.ezyhttp.login.repository.UserRepository;
 import org.youngmonkeys.example.ezyhttp.login.service.IUserService;
 
@@ -16,6 +19,9 @@ public class UserService implements IUserService {
 
     @EzyAutoBind
     private UserRepository userRepository;
+
+    @EzyAutoBind
+    private UserDataRepository userDataRepository;
 
     @Override
     public User getUserInfoByEmail(String email) {
@@ -28,7 +34,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getUserByFacebookId(String facebookId) { return userRepository.findByField("facebookId", facebookId); }
+    public User getUserByThirdPartyId(String thirdPartyId) {
+        UserData userData = userDataRepository.findByField("thirdPartyId", thirdPartyId);
+        if (userData != null) {
+            return userRepository.findById(userData.getUserId());
+        }
+        return null;
+    }
 
     @Override
     public User saveGoogleUserInfo(Userinfo googleUserInfo) {
@@ -49,7 +61,6 @@ public class UserService implements IUserService {
     @Override
     public User saveFacebookUserInfo(com.restfb.types.User userFacebook) {
         User user = new User();
-        user.setFacebookId(userFacebook.getId());
         user.setEmail(userFacebook.getId());
         user.setFullName(userFacebook.getName());
         user.setAccountType(AccountType.FACEBOOK);
