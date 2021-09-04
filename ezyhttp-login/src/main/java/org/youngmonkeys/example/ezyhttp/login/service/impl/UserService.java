@@ -28,7 +28,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getUserByFacebookId(String facebookId) { return userRepository.findByField("facebookId", facebookId); }
+    public User getUserByThirdPartyId(String thirdPartyId) { return userRepository.findByField("thirdPartyId", thirdPartyId); }
 
     @Override
     public User saveGoogleUserInfo(Userinfo googleUserInfo) {
@@ -49,7 +49,7 @@ public class UserService implements IUserService {
     @Override
     public User saveFacebookUserInfo(com.restfb.types.User userFacebook) {
         User user = new User();
-        user.setFacebookId(userFacebook.getId());
+        user.setThirdPartyId(userFacebook.getId());
         user.setEmail(userFacebook.getId());
         user.setFullName(userFacebook.getName());
         user.setAccountType(AccountType.FACEBOOK);

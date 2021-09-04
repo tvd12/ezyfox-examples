@@ -99,7 +99,7 @@ public class LoginController {
             return Redirect.to("/login-error");
         }
         boolean userExisted = true;
-        User user = userService.getUserByFacebookId(userFacebook.getId());
+        User user = userService.getUserByThirdPartyId(userFacebook.getId());
         if (user == null) {
             userExisted = false;
             user = userService.saveFacebookUserInfo(userFacebook);
@@ -108,13 +108,13 @@ public class LoginController {
         String accessToken = authenticationService.generateAccessToken(user.getId());
         return userExisted && user.getStatus() == UserStatus.UPDATED
                 ? Redirect.builder()
-                .uri("/home")
-                .addCookie("accessToken", accessToken)
-                .build()
+                    .uri("/home")
+                    .addCookie("accessToken", accessToken)
+                    .build()
                 : Redirect.builder()
-                .uri("/user/update")
-                .addCookie("accessToken", accessToken)
-                .build();
+                    .uri("/user/update")
+                    .addCookie("accessToken", accessToken)
+                    .build();
     }
 
     @DoPost("/logout")

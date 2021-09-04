@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 	`fullName` VARCHAR(45),
     `firstName` VARCHAR(45),
 	`email` VARCHAR(45),
-	`facebookId` VARCHAR(45),
+	`thirdPartyId` VARCHAR(45),
 	`createTime` DATETIME,
     `updateTime` DATETIME,
     `deleted` TINYINT,
