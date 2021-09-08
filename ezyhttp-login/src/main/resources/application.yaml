@@ -3,6 +3,7 @@ resources:
 server:
   port: 8080
 datasource:
+  jdbcUrl: jdbc:mysql://sa:123@localhost:3306/test
   driverClassName: com.mysql.cj.jdbc.Driver
 hibernate:
   show_sql: true

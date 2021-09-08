@@ -1,6 +1,7 @@
 package com.tvd12.ezydata.example.mongo.controller;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -94,30 +95,37 @@ public class BookController {
     ) {
         List<Book> books = null;
         if(EzyStrings.isEmpty(upperThan)) {
-        	if(EzyStrings.isEmpty(lowerThan)) {
-        		books = bookRepository.findBooks(Next.fromSkipLimit(0, size));
-        	}
-        	else {
-        		books = bookRepository.findByNameLt(lowerThan, Next.fromSkipLimit(0, size));
-        	}
+            books = EzyStrings.isEmpty(lowerThan)
+                ? bookRepository.findBooks(Next.fromSkipLimit(0, size))
+                : bookRepository.findByNameLt(lowerThan, Next.fromSkipLimit(0, size));
         }
     	else {
     		books = bookRepository.findByNameGt(upperThan, Next.fromSkipLimit(0, size));
     	}
+        return decorateBooksToResponse(books);
+    }
+
+    @DoGet("/books/in")
+    public List<BookResponse> getBooks(@RequestParam("ids") Long[] bookIds) {
+        List<Book> books = bookRepository.findListByIds(Arrays.asList(bookIds));
+        return decorateBooksToResponse(books);
+    }
+
+    private List<BookResponse> decorateBooksToResponse(List<Book> books) {
         List<Long> authorIds = books.stream()
-        		.map(it -> it.getAuthorId())
-        		.collect(Collectors.toList());
+            .map(Book::getAuthorId)
+            .collect(Collectors.toList());
         List<Long> categoryIds = books.stream()
-        		.map(it -> it.getCategoryId())
-        		.collect(Collectors.toList());
+            .map(Book::getCategoryId)
+            .collect(Collectors.toList());
         Map<Long, Author> authors = authorRepository.findListByIds(authorIds)
-        	.stream()
-        	.collect(Collectors.toMap(it -> it.getId(), it -> it));
+            .stream()
+            .collect(Collectors.toMap(Author::getId, it -> it));
         Map<Long, Category> categories = categoryRepository.findListByIds(categoryIds)
-    		.stream()
-        	.collect(Collectors.toMap(it -> it.getId(), it -> it));
+            .stream()
+            .collect(Collectors.toMap(Category::getId, it -> it));
         return entityToResponseConverter.toBooksResponse(
-        	books,
+            books,
             authors,
             categories
         );

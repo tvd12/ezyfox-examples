@@ -9,9 +9,8 @@ public class HttpClientConfig {
 
     @EzySingleton
     public HttpClientProxy httpClientProxy() throws Exception {
-        HttpClientProxy httpClientProxy = HttpClientProxy.builder()
+        return HttpClientProxy.builder()
+            .autoStart(true)
             .build();
-        httpClientProxy.start();
-        return httpClientProxy;
     }
 }

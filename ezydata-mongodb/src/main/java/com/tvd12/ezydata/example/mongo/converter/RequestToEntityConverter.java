@@ -14,8 +14,8 @@ public class RequestToEntityConverter {
 	        request.getAuthorId(),
 	        request.getBookName(),
 	        request.getPrice(),
-	        DateConverter.toLocalDate(request.getReleaseDate()),
-	        DateConverter.toLocalDateTime(request.getReleaseTime())
+	        request.getReleaseDate(),
+	        request.getReleaseTime()
 	    );
 	}
 }

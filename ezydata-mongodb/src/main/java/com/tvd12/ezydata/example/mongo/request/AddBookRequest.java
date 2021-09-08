@@ -1,6 +1,8 @@
 package com.tvd12.ezydata.example.mongo.request;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.Getter;
@@ -13,6 +15,6 @@ public class AddBookRequest {
     private Long authorId;
     private String bookName;
     private BigDecimal price;
-    private Date releaseDate;
-    private Date releaseTime;
+    private LocalDate releaseDate;
+    private LocalDateTime releaseTime;
 }
