@@ -28,6 +28,9 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User getUserByThirdPartyId(String thirdPartyId) { return userRepository.findByField("thirdPartyId", thirdPartyId); }
+
+    @Override
     public User saveGoogleUserInfo(Userinfo googleUserInfo) {
         // create new user information
         User user = new User();
@@ -37,6 +40,19 @@ public class UserService implements IUserService {
         user.setFirstName(googleUserInfo.getGivenName());
         user.setAvatarURL(googleUserInfo.getPicture());
         user.setAccountType(AccountType.GOOGLE);
+        user.setDeleted(false);
+        user.setStatus(UserStatus.REGISTER);
+        userRepository.save(user);
+        return user;
+    }
+
+    @Override
+    public User saveFacebookUserInfo(com.restfb.types.User userFacebook) {
+        User user = new User();
+        user.setThirdPartyId(userFacebook.getId());
+        user.setEmail(userFacebook.getId());
+        user.setFullName(userFacebook.getName());
+        user.setAccountType(AccountType.FACEBOOK);
         user.setDeleted(false);
         user.setStatus(UserStatus.REGISTER);
         userRepository.save(user);

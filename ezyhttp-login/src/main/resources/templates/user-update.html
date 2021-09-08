@@ -20,6 +20,14 @@
 <div class="ui text container" style="margin-top: 20px; max-width: 450px">
     <h2>Update user information</h2>
     <form class="ui form" th:action="@{/user/save}" method="post">
+        <div th:if="${accountType == 'FACEBOOK'}" class="field">
+            <label>Email</label>
+            <input name="email" type="email" placeholder="Email">
+        </div>
+        <div th:unless="${accountType == 'FACEBOOK'}" class="field">
+            <label>Email</label>
+            <input readonly name="email" type="email" placeholder="Email" th:value="${user.email}">
+        </div>
         <div class="field">
             <label>First Name</label>
             <input name="firstName" type="text" placeholder="First Name">

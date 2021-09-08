@@ -11,6 +11,8 @@ public class UserDataService implements IUserDataService {
 
     private static final String GOOGLE_TOKEN_KEY = "googleToken";
 
+    private static final String FACEBOOK_TOKEN_KEY = "facebookToken";
+
     @EzyAutoBind
     private UserDataRepository userDataRepository;
 
@@ -20,6 +22,15 @@ public class UserDataService implements IUserDataService {
         userData.setUserId(userId);
         userData.setKey(GOOGLE_TOKEN_KEY);
         userData.setValue(googleToken);
+        userDataRepository.save(userData);
+    }
+
+    @Override
+    public void saveFacebookToken(long userId, String facebookToken) {
+        UserData userData = new UserData();
+        userData.setUserId(userId);
+        userData.setKey(FACEBOOK_TOKEN_KEY);
+        userData.setValue(facebookToken);
         userDataRepository.save(userData);
     }
 }

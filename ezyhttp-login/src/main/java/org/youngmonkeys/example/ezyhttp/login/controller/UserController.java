@@ -23,6 +23,7 @@ public class UserController {
         User user = userService.getUserById(userId);
         return View.builder()
                 .addVariable("user", user)
+                .addVariable("accountType", user.getAccountType().toString())
                 .template("user-update")
                 .build();
     }
@@ -36,6 +37,7 @@ public class UserController {
         if (user == null) {
             throw new UserNotFoundException("user with id: " + userId + " not found");
         }
+        user.setEmail(request.getEmail());
         user.setFullName(request.getFirstName() + " " + request.getLastName());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());

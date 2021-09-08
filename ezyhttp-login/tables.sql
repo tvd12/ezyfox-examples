@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 	`fullName` VARCHAR(45),
     `firstName` VARCHAR(45),
 	`email` VARCHAR(45),
+	`thirdPartyId` VARCHAR(45),
 	`createTime` DATETIME,
     `updateTime` DATETIME,
     `deleted` TINYINT,
@@ -36,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 CREATE TABLE IF NOT EXISTS `user_data` (
 	`userId` BIGINT NOT NULL,
 	`data_key` VARCHAR(45),
-	`data_value` VARCHAR(256),
+	`data_value` VARCHAR(264),
 	`createTime` DATETIME,
     `updateTime` DATETIME,
     `deleted` TINYINT,
