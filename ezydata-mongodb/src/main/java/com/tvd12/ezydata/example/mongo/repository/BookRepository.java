@@ -14,6 +14,10 @@ public interface BookRepository extends EzyMongoRepository<Long, Book> {
 
     Book findByNameAndAuthorId(String name, Long authorId);
 
+    int countByAuthorId(long authorId);
+
+    void deleteByAuthorId(long authorId);
+
     @EzyQuery("{$orderby:{name:1}}")
     List<Book> findBooks(Next next);
 
@@ -25,4 +29,10 @@ public interface BookRepository extends EzyMongoRepository<Long, Book> {
 
     @EzyQuery("[{ $group: { _id : 'sum', sum : { $sum: {$toDecimal: '$price'}} } }]")
     SumBookPriceResult sumPrice();
+
+    @EzyQuery("{authorId:{$gt:?0}}")
+    int countByAuthorIdGt(long authorId);
+
+    @EzyQuery("{authorId:{$gt:?0}}")
+    void deleteByAuthorIdGt(long authorId);
 }

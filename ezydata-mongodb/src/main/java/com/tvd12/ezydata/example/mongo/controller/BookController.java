@@ -21,12 +21,7 @@ import com.tvd12.ezyfox.io.EzyStrings;
 import com.tvd12.ezyfox.util.Next;
 import com.tvd12.ezyhttp.core.exception.HttpBadRequestException;
 import com.tvd12.ezyhttp.core.exception.HttpNotFoundException;
-import com.tvd12.ezyhttp.server.core.annotation.Controller;
-import com.tvd12.ezyhttp.server.core.annotation.DoGet;
-import com.tvd12.ezyhttp.server.core.annotation.DoPost;
-import com.tvd12.ezyhttp.server.core.annotation.PathVariable;
-import com.tvd12.ezyhttp.server.core.annotation.RequestBody;
-import com.tvd12.ezyhttp.server.core.annotation.RequestParam;
+import com.tvd12.ezyhttp.server.core.annotation.*;
 
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -134,5 +129,21 @@ public class BookController {
     @DoGet("/books/expected-revenue")
     public BigDecimal getExpectedRevenue() {
         return bookRepository.sumPrice().getSum();
+    }
+
+    @DoGet("/books/count-by-author-id")
+    public int getCountByAuthorId(@RequestParam long authorId) {
+        return bookRepository.countByAuthorId(authorId);
+    }
+
+    @DoGet("/books/count-by-author-id-gt")
+    public int getCountByAuthorIdGt(@RequestParam long authorId) {
+        return bookRepository.countByAuthorIdGt(authorId);
+    }
+
+    @DoDelete("/books/delete-by-author-id-gt")
+    public boolean deleteByAuthorIdGt(@RequestParam long authorId) {
+        bookRepository.deleteByAuthorIdGt(authorId);
+        return Boolean.TRUE;
     }
 }
