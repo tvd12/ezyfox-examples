@@ -18,6 +18,9 @@ public class DataToResponseConverter {
 	public AuthorResponse toResponse(
 		AuthorData data
 	) {
+		if (data == null) {
+			return null;
+		}
 		return AuthorResponse.builder()
 			.id(data.getId())
 			.name(data.getName())
@@ -27,6 +30,9 @@ public class DataToResponseConverter {
 	public CategoryResponse toResponse(
 		CategoryData data
 	) {
+		if (data == null) {
+			return null;
+		}
 		return CategoryResponse.builder()
 			.id(data.getId())
 			.name(data.getName())

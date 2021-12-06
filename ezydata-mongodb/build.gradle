@@ -3,4 +3,5 @@ apply from: '../build-ezydata.gradle'
 dependencies {
     implementation project(':ezydata-common')
     implementation 'com.tvd12:ezydata-mongodb:' + ezydataVersion
+    implementation 'com.tvd12:ezyfox-boot-autoconfigure:' + ezyfoxBootVersion
 }

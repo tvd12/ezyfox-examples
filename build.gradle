@@ -19,7 +19,7 @@ subprojects {
     apply plugin: 'idea'
     apply plugin: 'jacoco'
 
-    sourceCompatibility = 1.8
+    sourceCompatibility = JavaVersion.VERSION_11
 
     repositories {
         mavenLocal()

@@ -16,6 +16,9 @@ import java.util.stream.Collectors;
 @EzySingleton
 public class EntityToDataConverter {
 	public AuthorData toData(Author author) {
+		if (author == null) {
+			return null;
+		}
 		return AuthorData.builder()
 			.id(author.getId())
 			.name(author.getName())
@@ -23,6 +26,9 @@ public class EntityToDataConverter {
 	}
 
 	public CategoryData toData(Category category) {
+		if (category == null) {
+			return null;
+		}
 		return CategoryData.builder()
 			.id(category.getId())
 			.name(category.getName())
