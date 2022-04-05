@@ -1,4 +1,4 @@
-package com.tvd12;
+package org.youngmonkeys.example.ezyhttp.website;
 
 import com.tvd12.ezyhttp.core.boot.EzyHttpApplicationBootstrap;
 import com.tvd12.ezyhttp.server.core.asm.RequestHandlerImplementer;

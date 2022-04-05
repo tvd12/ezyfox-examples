@@ -1,11 +1,11 @@
-package com.tvd12.user_management.test;
+package org.youngmonkeys.example.ezyhttp.website.user_management.test;
 
 import com.tvd12.ezyhttp.client.HttpClient;
 import com.tvd12.ezyhttp.client.request.PostRequest;
 import com.tvd12.ezyhttp.client.request.Request;
 import com.tvd12.ezyhttp.client.request.RequestEntity;
 import com.tvd12.ezyhttp.core.constant.StatusCodes;
-import com.tvd12.user_management.entity.User;
+import org.youngmonkeys.example.ezyhttp.website.user_management.entity.User;
 
 
 public class ApiAddUserTest {

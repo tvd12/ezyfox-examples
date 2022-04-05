@@ -1,4 +1,4 @@
-package com.tvd12.user_management.test;
+package org.youngmonkeys.example.ezyhttp.website.user_management.test;
 
 
 import com.tvd12.ezyhttp.client.HttpClientProxy;

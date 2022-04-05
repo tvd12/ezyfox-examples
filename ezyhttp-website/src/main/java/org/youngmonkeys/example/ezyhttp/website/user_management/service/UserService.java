@@ -1,7 +1,7 @@
-package com.tvd12.user_management.service;
+package org.youngmonkeys.example.ezyhttp.website.user_management.service;
 
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
-import com.tvd12.user_management.entity.User;
+import org.youngmonkeys.example.ezyhttp.website.user_management.entity.User;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

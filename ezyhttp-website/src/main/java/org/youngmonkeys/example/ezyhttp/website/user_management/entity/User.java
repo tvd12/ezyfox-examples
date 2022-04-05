@@ -1,4 +1,4 @@
-package com.tvd12.user_management.entity;
+package org.youngmonkeys.example.ezyhttp.website.user_management.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

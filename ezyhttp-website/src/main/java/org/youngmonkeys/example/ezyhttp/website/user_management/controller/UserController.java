@@ -1,13 +1,13 @@
-package com.tvd12.user_management.controller;
+package org.youngmonkeys.example.ezyhttp.website.user_management.controller;
 
 import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyhttp.core.exception.HttpConflictException;
 import com.tvd12.ezyhttp.core.exception.HttpNotFoundException;
 import com.tvd12.ezyhttp.core.response.ResponseEntity;
 import com.tvd12.ezyhttp.server.core.annotation.*;
-import com.tvd12.user_management.entity.User;
-import com.tvd12.user_management.service.UserService;
 import lombok.Setter;
+import org.youngmonkeys.example.ezyhttp.website.user_management.entity.User;
+import org.youngmonkeys.example.ezyhttp.website.user_management.service.UserService;
 
 @Setter
 @Controller("api/v1/users")
