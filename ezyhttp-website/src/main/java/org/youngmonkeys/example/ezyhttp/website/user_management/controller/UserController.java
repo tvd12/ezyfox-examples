@@ -2,6 +2,8 @@ package org.youngmonkeys.example.ezyhttp.website.user_management.controller;
 
 import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyhttp.server.core.annotation.*;
+import com.tvd12.ezyhttp.server.core.request.RequestArguments;
+import com.tvd12.ezyhttp.server.core.view.Redirect;
 import com.tvd12.ezyhttp.server.core.view.View;
 import lombok.Setter;
 import org.youngmonkeys.example.ezyhttp.website.user_management.entity.User;
@@ -29,10 +31,18 @@ public class UserController {
     }
 
     @DoPost("/add")
-    public View addUser(@RequestBody User user) {
-        User existed = userService.addUser(user);
+    public Redirect addUser(@RequestBody User user) {
+        userService.addUser(user);
+        return Redirect.builder().uri("/api/v1/users/home")
+                .addAttribute("username", user.getUsername())
+                .build();
+    }
+
+    @DoGet("/home")
+    public Object home(RequestArguments arguments) {
+        String username = arguments.getRedirectionAttribute("username");
         return View.builder()
-                .addVariable("username", user.getUsername())
+                .addVariable("username", username)
                 .template("home")
                 .build();
     }
