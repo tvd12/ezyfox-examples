@@ -1,0 +1,29 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <!--    semantic ui-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+            integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+<div class="ui text container" style="margin-top: 20px; max-width: 450px">
+    <h2>Update user information</h2>
+    <form class="ui form" th:action="@{/api/v1/users/add}" method="post">
+        <div class="field">
+            <label>Username</label>
+            <input name="username" type="text" placeholder="Username">
+        </div>
+        <div class="field">
+            <label>Password</label>
+            <input name="password" type="password" placeholder="Password">
+        </div>
+        <button class="ui fluid middle teal submit button" type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>
