@@ -1,0 +1,35 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <!--    semantic ui-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+            integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script>
+        doSearch = () => {
+            let username = document.querySelector('input[name=username]').value
+            if (username === "") {
+                alert("Please enter a username");
+                return;
+            }
+            window.location.href = "/api/v1/users/" + username;
+        }
+    </script>
+</head>
+<body>
+<div class="ui text container" style="margin-top: 20px; max-width: 450px">
+    <h2>Search user information</h2>
+    <div class="ui form">
+        <div class="field">
+            <label>Username</label>
+            <input name="username" type="text" placeholder="Username" >
+        </div>
+    </div>
+    <button class="ui fluid middle teal submit button" type="button" id="btn-save" onclick="doSearch()">Search Username</button>
+</div>
+</body>
+</html>
