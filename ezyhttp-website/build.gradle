@@ -1,0 +1,7 @@
+apply from: '../build-ezydata.gradle'
+
+dependencies {
+    implementation 'com.tvd12:ezyhttp-server-thymeleaf:' + ezyhttpVersion
+    implementation 'com.tvd12:ezyhttp-server-boot:' + ezyhttpVersion
+    implementation 'com.tvd12:ezyhttp-client:' + ezyhttpVersion
+}
