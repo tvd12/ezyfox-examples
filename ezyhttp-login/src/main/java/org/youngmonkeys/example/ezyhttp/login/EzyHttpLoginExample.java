@@ -1,6 +1,6 @@
 package org.youngmonkeys.example.ezyhttp.login;
 
-import com.tvd12.ezyhttp.core.boot.EzyHttpApplicationBootstrap;
+import com.tvd12.ezyhttp.server.boot.EzyHttpApplicationBootstrap;
 
 public class EzyHttpLoginExample {
     public static void main(String[] args) throws Exception {

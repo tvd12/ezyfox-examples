@@ -13,6 +13,7 @@ import com.tvd12.ezyhttp.client.HttpClientProxy;
 import com.tvd12.ezyhttp.client.request.PostRequest;
 import com.tvd12.ezyhttp.client.request.RequestEntity;
 import com.tvd12.ezyhttp.core.constant.ContentTypes;
+import lombok.Setter;
 import org.youngmonkeys.example.ezyhttp.login.service.IFacebookService;
 
 import java.util.Map;
@@ -20,6 +21,7 @@ import java.util.Map;
 /**
  * Implement class of interface facebook login service
  */
+@Setter
 @EzySingleton
 public class FacebookService extends EzyLoggable implements IFacebookService {
 
@@ -34,9 +36,6 @@ public class FacebookService extends EzyLoggable implements IFacebookService {
 
     @EzyProperty("facebook.get_token_url")
     private String getTokenUri;
-
-    @EzyProperty("facebook.get_user_info_uri")
-    private String getUserInfoUri;
 
     @EzyAutoBind
     private HttpClientProxy httpClientProxy;

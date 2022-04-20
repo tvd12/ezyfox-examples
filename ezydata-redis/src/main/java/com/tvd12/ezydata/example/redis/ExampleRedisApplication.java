@@ -1,6 +1,6 @@
 package com.tvd12.ezydata.example.redis;
 
-import com.tvd12.ezyhttp.core.boot.EzyHttpApplicationBootstrap;
+import com.tvd12.ezyhttp.server.boot.EzyHttpApplicationBootstrap;
 
 public class ExampleRedisApplication {
 	

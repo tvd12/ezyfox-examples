@@ -21,6 +21,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+
 import static com.tvd12.test.assertion.Asserts.*;
 import static org.mockito.Mockito.*;
 
@@ -71,7 +73,9 @@ public class BookServiceTest {
             addBookData.getBookName(),
             addBookData.getPrice(),
             addBookData.getReleaseDate(),
-            addBookData.getReleaseTime()
+            addBookData.getReleaseTime(),
+            LocalDateTime.now(),
+            LocalDateTime.now()
         );
 
         when(dataToEntityConverter.toEntity(addBookData)).thenReturn(book);
@@ -148,7 +152,9 @@ public class BookServiceTest {
             addBookData.getBookName(),
             addBookData.getPrice(),
             addBookData.getReleaseDate(),
-            addBookData.getReleaseTime()
+            addBookData.getReleaseTime(),
+            LocalDateTime.now(),
+            LocalDateTime.now()
         );
 
         when(

@@ -15,6 +15,7 @@ import com.tvd12.ezyhttp.client.HttpClientProxy;
 import com.tvd12.ezyhttp.client.request.PostRequest;
 import com.tvd12.ezyhttp.client.request.RequestEntity;
 import com.tvd12.ezyhttp.core.constant.ContentTypes;
+import lombok.Setter;
 import org.youngmonkeys.example.ezyhttp.login.service.IGoogleService;
 
 import java.util.Map;
@@ -22,26 +23,21 @@ import java.util.Map;
 /**
  * Implement class of interface google login service
  */
+@Setter
 @EzySingleton
 public class GoogleService extends EzyLoggable implements IGoogleService {
-
-    @EzyProperty("google.verify_url")
-    private String verifyUrl;
 
     @EzyProperty("google.client_id")
     private String clientId;
 
-    @EzyProperty("google.secret_key")
-    private String secretKey;
+    @EzyProperty("google.client_secret")
+    private String clientSecret;
 
     @EzyProperty("google.redirect_uri")
     private String redirectUri;
 
     @EzyProperty("google.get_token_uri")
     private String getTokenUri;
-
-    @EzyProperty("google.get_user_info_uri")
-    private String getUserInfoUri;
 
     @EzyAutoBind
     private HttpClientProxy httpClientProxy;
@@ -69,7 +65,7 @@ public class GoogleService extends EzyLoggable implements IGoogleService {
     public String getAccessToken(String code) {
         Map<String, Object> requestBody = EzyMapBuilder.mapBuilder()
             .put("client_id", clientId)
-            .put("client_secret", secretKey)
+            .put("client_secret", clientSecret)
             .put("redirect_uri", redirectUri)
             .put("code", code)
             .put("grant_type", "authorization_code")
