@@ -13,6 +13,7 @@ public class UserService {
     public User addUser(User user) {
         return users.put(user.getUsername(), user);
     }
+
     public User getUser(String username) {
         return users.get(username);
     }

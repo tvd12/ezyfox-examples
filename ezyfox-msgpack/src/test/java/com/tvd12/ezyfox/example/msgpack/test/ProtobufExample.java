@@ -12,7 +12,7 @@ public class ProtobufExample {
 
     private static int deserialize(byte[] bytes) {
         int answer = 0;
-        for(int i = 0 ; i < bytes.length ; ++i) {
+        for (int i = 0; i < bytes.length; ++i) {
             answer += (bytes[i] & 0x7F) << i * 7;
         }
         return answer;
@@ -29,22 +29,22 @@ public class ProtobufExample {
         }
         final ByteBuffer byteBuffer = ByteBuffer.allocate(byteCount);
         int remainValue = value;
-        for(int i = 0 ; i < byteCount - 1 ; ++i) {
+        for (int i = 0; i < byteCount - 1; ++i) {
             // 0x80 = 10000000
-            byteBuffer.put((byte)(0x80 | (0x7F & remainValue)));
+            byteBuffer.put((byte) (0x80 | (0x7F & remainValue)));
             remainValue >>= 7;
         }
-        byteBuffer.put((byte)remainValue);
+        byteBuffer.put((byte) remainValue);
         return byteBuffer.array();
     }
 
     private static String toString(byte[] array) {
         final StringBuilder builder = new StringBuilder("[");
-        for(int i = 0 ; i < array.length ; ++i) {
-            final ByteBuffer buffer = ByteBuffer.allocate(4).put(new byte[] { 0, 0, 0, array[i]});
+        for (int i = 0; i < array.length; ++i) {
+            final ByteBuffer buffer = ByteBuffer.allocate(4).put(new byte[]{0, 0, 0, array[i]});
             buffer.flip();
             builder.append(buffer.getInt());
-            if(i < array.length - 1) {
+            if (i < array.length - 1) {
                 builder.append(", ");
             }
         }

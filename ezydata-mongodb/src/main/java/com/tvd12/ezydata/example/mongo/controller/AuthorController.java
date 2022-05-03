@@ -7,18 +7,17 @@ import com.tvd12.ezydata.example.mongo.request.AddAuthorRequest;
 import com.tvd12.ezyhttp.server.core.annotation.Controller;
 import com.tvd12.ezyhttp.server.core.annotation.DoPost;
 import com.tvd12.ezyhttp.server.core.annotation.RequestBody;
-
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Controller("/api/v1/author")
 public class AuthorController {
-	private final AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
     private final EzyMaxIdRepository maxIdRepository;
-    
+
     @DoPost("/add")
     public Author addAuthor(@RequestBody AddAuthorRequest request) {
-    	Author author = new Author(
+        Author author = new Author(
             maxIdRepository.incrementAndGet("author"),
             request.getAuthorName()
         );

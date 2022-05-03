@@ -27,22 +27,17 @@ import java.util.Map;
 @EzySingleton
 public class GoogleService extends EzyLoggable implements IGoogleService {
 
+    private static final int DEFAULT_GOOGLE_AUTH_TIMEOUT = 15 * 1000;
     @EzyProperty("google.client_id")
     private String clientId;
-
     @EzyProperty("google.client_secret")
     private String clientSecret;
-
     @EzyProperty("google.redirect_uri")
     private String redirectUri;
-
     @EzyProperty("google.get_token_uri")
     private String getTokenUri;
-
     @EzyAutoBind
     private HttpClientProxy httpClientProxy;
-
-    private static final int DEFAULT_GOOGLE_AUTH_TIMEOUT = 15 * 1000;
 
     @Override
     public Userinfo getUserInfoByAccessToken(String accessTokenStr) {
@@ -53,8 +48,7 @@ public class GoogleService extends EzyLoggable implements IGoogleService {
             .build();
         try {
             return oauth2.userinfo().get().execute();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.info("get google user information by access token error", e);
             return null;
         }
@@ -82,8 +76,7 @@ public class GoogleService extends EzyLoggable implements IGoogleService {
         try {
             Map<String, Object> response = httpClientProxy.call(request, DEFAULT_GOOGLE_AUTH_TIMEOUT);
             return (String) response.get("access_token");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.info("get google access token error", e);
             return null;
         }

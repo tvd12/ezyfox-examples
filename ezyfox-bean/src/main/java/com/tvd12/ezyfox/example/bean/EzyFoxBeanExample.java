@@ -10,7 +10,7 @@ public class EzyFoxBeanExample {
             .scan("com.tvd12.ezyfox.example.bean")
             .build();
         final BookController bookController =
-            (BookController)beanContext.getBean(BookController.class);
+            (BookController) beanContext.getBean(BookController.class);
         bookController.saveBook(new Book(1L, "EzyFox in action"));
     }
 }

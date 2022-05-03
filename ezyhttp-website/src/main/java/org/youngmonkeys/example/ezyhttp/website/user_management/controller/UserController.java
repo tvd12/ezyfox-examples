@@ -19,32 +19,32 @@ public class UserController {
     @DoGet("/add")
     public View addUserView() {
         return View.builder()
-                .template("user-add")
-                .build();
+            .template("user-add")
+            .build();
     }
 
     @DoGet("/search")
     public View searchUserView() {
         return View.builder()
-                .template("user-search")
-                .build();
+            .template("user-search")
+            .build();
     }
 
     @DoPost("/add")
     public Redirect addUser(@RequestBody User user) {
         userService.addUser(user);
         return Redirect.builder().uri("/api/v1/users/home")
-                .addAttribute("username", user.getUsername())
-                .build();
+            .addAttribute("username", user.getUsername())
+            .build();
     }
 
     @DoGet("/home")
     public Object home(RequestArguments arguments) {
         String username = arguments.getRedirectionAttribute("username");
         return View.builder()
-                .addVariable("username", username)
-                .template("home")
-                .build();
+            .addVariable("username", username)
+            .template("home")
+            .build();
     }
 
     @DoGet("/{username}")
@@ -52,9 +52,9 @@ public class UserController {
         User user = userService.getUser(username);
         String msg = user != null ? "User " + username + " with info: " + user : "User " + username + " not found";
         return View.builder()
-                .addVariable("message", msg)
-                .template("user-info")
-                .build();
+            .addVariable("message", msg)
+            .template("user-info")
+            .build();
     }
 
 }

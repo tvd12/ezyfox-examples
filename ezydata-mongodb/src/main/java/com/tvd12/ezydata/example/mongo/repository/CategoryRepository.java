@@ -6,6 +6,6 @@ import com.tvd12.ezyfox.database.annotation.EzyRepository;
 
 @EzyRepository
 public interface CategoryRepository extends EzyMongoRepository<Long, Category> {
-	
+
     Category findByName(String name);
 }

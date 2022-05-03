@@ -26,10 +26,9 @@ public class AuthenticationService implements IAuthenticationService {
     public long verifyAccessToken(String accessToken) {
         LocalDateTime now = LocalDateTime.now();
         AccessToken accessTokenObj = accessTokenRepository.findById(accessToken);
-        if (accessTokenObj == null ) {
+        if (accessTokenObj == null) {
             throw new TokenNotFoundException("token: " + accessToken + " not found");
-        }
-        else if (accessTokenObj.getExpireIn().isBefore(now)) {
+        } else if (accessTokenObj.getExpireIn().isBefore(now)) {
             throw new TokenExpiredException("token: " + accessToken + " expired");
         }
         return accessTokenObj.getUserId();

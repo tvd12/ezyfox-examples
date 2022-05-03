@@ -17,7 +17,7 @@ public class UserController {
     @DoGet("/{username}")
     public Object getUser(@PathVariable String username) {
         final User user = userService.getUser(username);
-        if(user == null) {
+        if (user == null) {
             return Redirect.to("/login");
         }
         return View.builder()

@@ -1,10 +1,10 @@
 package com.tvd12.ezydata.example.redis.request;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Getter
 @Setter

@@ -1,8 +1,5 @@
 package com.tvd12.ezydata.example.jpa.controller;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import com.tvd12.ezydata.example.jpa.converter.DataToResponseConverter;
 import com.tvd12.ezydata.example.jpa.converter.RequestToDataConverter;
 import com.tvd12.ezydata.example.jpa.data.AddBookData;
@@ -13,14 +10,11 @@ import com.tvd12.ezydata.example.jpa.response.BookRawResponse;
 import com.tvd12.ezydata.example.jpa.response.BookResponse;
 import com.tvd12.ezydata.example.jpa.service.BookService;
 import com.tvd12.ezydata.example.jpa.validator.BookValidator;
-import com.tvd12.ezyhttp.server.core.annotation.Controller;
-import com.tvd12.ezyhttp.server.core.annotation.DoGet;
-import com.tvd12.ezyhttp.server.core.annotation.DoPost;
-import com.tvd12.ezyhttp.server.core.annotation.PathVariable;
-import com.tvd12.ezyhttp.server.core.annotation.RequestBody;
-import com.tvd12.ezyhttp.server.core.annotation.RequestParam;
-
+import com.tvd12.ezyhttp.server.core.annotation.*;
 import lombok.AllArgsConstructor;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @AllArgsConstructor
 @Controller("/api/v1")

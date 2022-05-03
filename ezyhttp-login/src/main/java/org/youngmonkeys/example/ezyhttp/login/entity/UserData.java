@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "user_data")
 @IdClass(UserDataId.class)
-@EqualsAndHashCode(of = { "userId", "key" }, callSuper = false)
+@EqualsAndHashCode(of = {"userId", "key"}, callSuper = false)
 public class UserData extends BaseEntity {
     @Id
     private long userId;

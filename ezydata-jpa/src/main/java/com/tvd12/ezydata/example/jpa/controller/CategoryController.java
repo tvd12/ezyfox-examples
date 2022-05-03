@@ -9,7 +9,6 @@ import com.tvd12.ezydata.example.jpa.response.CategoryResponse;
 import com.tvd12.ezydata.example.jpa.service.CategoryService;
 import com.tvd12.ezydata.example.jpa.validator.CategoryValidator;
 import com.tvd12.ezyhttp.server.core.annotation.*;
-
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

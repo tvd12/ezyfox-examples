@@ -8,7 +8,6 @@ import com.tvd12.ezyhttp.core.exception.HttpBadRequestException;
 import com.tvd12.ezyhttp.server.core.annotation.Controller;
 import com.tvd12.ezyhttp.server.core.annotation.DoPost;
 import com.tvd12.ezyhttp.server.core.annotation.RequestBody;
-
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

@@ -17,11 +17,11 @@ public class ApiAddUserTest {
         body.setUsername("tvd12");
         body.setPassword("123456");
         RequestEntity requestEntity = RequestEntity.body(body);
-        Request request =  new PostRequest()
-                .setURL(API_URL + "add")
-                .setEntity(requestEntity)
-                .setResponseType(Boolean.class)
-                .setResponseType(StatusCodes.CONFLICT,String.class);
+        Request request = new PostRequest()
+            .setURL(API_URL + "add")
+            .setEntity(requestEntity)
+            .setResponseType(Boolean.class)
+            .setResponseType(StatusCodes.CONFLICT, String.class);
         Boolean response = httpClient.call(request);
         System.out.println("add user reponse: " + response);
 

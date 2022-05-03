@@ -1,12 +1,7 @@
 package com.tvd12.ezymq.example.kafka;
 
 import com.tvd12.ezymq.kafka.EzyKafkaConsumer;
-import com.tvd12.ezymq.kafka.EzyKafkaProducer;
 import com.tvd12.ezymq.kafka.EzyKafkaProxy;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class KafkaConsumer {
 

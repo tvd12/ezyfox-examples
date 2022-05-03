@@ -2,7 +2,10 @@ package org.youngmonkeys.example.ezyhttp.login.controller;
 
 import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.sercurity.EzySHA256;
-import com.tvd12.ezyhttp.server.core.annotation.*;
+import com.tvd12.ezyhttp.server.core.annotation.Controller;
+import com.tvd12.ezyhttp.server.core.annotation.DoGet;
+import com.tvd12.ezyhttp.server.core.annotation.DoPost;
+import com.tvd12.ezyhttp.server.core.annotation.RequestBody;
 import com.tvd12.ezyhttp.server.core.view.Redirect;
 import com.tvd12.ezyhttp.server.core.view.View;
 import org.youngmonkeys.example.ezyhttp.login.annotation.UserId;
@@ -22,10 +25,10 @@ public class UserController {
     public View userUpdateGet(@UserId long userId) {
         User user = userService.getUserById(userId);
         return View.builder()
-                .addVariable("user", user)
-                .addVariable("accountType", user.getAccountType().toString())
-                .template("user-update")
-                .build();
+            .addVariable("user", user)
+            .addVariable("accountType", user.getAccountType().toString())
+            .template("user-update")
+            .build();
     }
 
     @DoPost("/user/save")

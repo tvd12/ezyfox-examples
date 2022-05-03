@@ -9,8 +9,8 @@ import java.lang.reflect.Method;
 
 @Interceptor
 public class GlobalRequestInterceptor
-        extends EzyLoggable
-        implements RequestInterceptor {
+    extends EzyLoggable
+    implements RequestInterceptor {
     @Override
     public boolean preHandle(RequestArguments arguments, Method handler) throws Exception {
         return true;

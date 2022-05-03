@@ -1,16 +1,15 @@
 package com.tvd12.ezydata.example.mongo.entity;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import com.tvd12.ezyfox.annotation.EzyId;
 import com.tvd12.ezyfox.database.annotation.EzyCollection;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter

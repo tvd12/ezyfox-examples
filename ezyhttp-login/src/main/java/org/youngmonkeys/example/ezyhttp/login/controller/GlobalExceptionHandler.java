@@ -15,17 +15,17 @@ public class GlobalExceptionHandler extends EzyLoggable {
     public Redirect handleAccessTokenException(RuntimeException e) {
         logger.info("token error", e);
         return Redirect.builder()
-                .addCookie("accessToken", "")
-                .uri("/login")
-                .build();
+            .addCookie("accessToken", "")
+            .uri("/login")
+            .build();
     }
 
     @TryCatch(UserNotFoundException.class)
     public Redirect handleUserNotFoundException(UserNotFoundException e) {
         logger.info("user not found", e);
         return Redirect.builder()
-                .addCookie("accessToken", "")
-                .uri("/login")
-                .build();
+            .addCookie("accessToken", "")
+            .uri("/login")
+            .build();
     }
 }

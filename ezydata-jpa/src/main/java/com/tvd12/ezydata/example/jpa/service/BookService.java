@@ -3,6 +3,7 @@ package com.tvd12.ezydata.example.jpa.service;
 import com.tvd12.ezydata.example.jpa.converter.DataToEntityConverter;
 import com.tvd12.ezydata.example.jpa.converter.EntityToDataConverter;
 import com.tvd12.ezydata.example.jpa.data.AddBookData;
+import com.tvd12.ezydata.example.jpa.data.BookData;
 import com.tvd12.ezydata.example.jpa.data.BookRawData;
 import com.tvd12.ezydata.example.jpa.entity.Author;
 import com.tvd12.ezydata.example.jpa.entity.Book;
@@ -14,7 +15,6 @@ import com.tvd12.ezydata.example.jpa.exception.InvalidCategoryIdException;
 import com.tvd12.ezydata.example.jpa.repository.AuthorRepository;
 import com.tvd12.ezydata.example.jpa.repository.BookRepository;
 import com.tvd12.ezydata.example.jpa.repository.CategoryRepository;
-import com.tvd12.ezydata.example.jpa.data.BookData;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
 import com.tvd12.ezyfox.io.EzyStrings;
 import com.tvd12.ezyfox.util.Next;
@@ -42,11 +42,11 @@ public class BookService {
     public void addBooks(int count) {
         List<Book> books = new ArrayList<>();
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        for(int i = 0 ; i < count ; ++i) {
+        for (int i = 0; i < count; ++i) {
             AddBookData data = AddBookData.builder()
                 .bookName(String.format("%03d", random.nextInt(1000)))
                 .authorId((long) random.nextInt(0, Integer.MAX_VALUE))
-                .categoryId((long)random.nextInt(0, Integer.MAX_VALUE))
+                .categoryId((long) random.nextInt(0, Integer.MAX_VALUE))
                 .price(BigDecimal.valueOf(random.nextInt(0, Integer.MAX_VALUE)))
                 .releaseDate(LocalDate.now())
                 .releaseTime(LocalDateTime.now())
@@ -87,7 +87,7 @@ public class BookService {
 
     public BookData getBook(Long bookId) {
         Book book = bookRepository.findById(bookId);
-        if(book == null) {
+        if (book == null) {
             throw new BookNotFoundException("not found book with id: " + bookId);
         }
         final Author author = authorRepository.findById(book.getAuthorId());
@@ -104,25 +104,25 @@ public class BookService {
 
     public List<BookRawData> getBooks(int skip, int limit) {
         return bookRepository.findBooksOrderByPriceAndId(
-            Next.fromSkipLimit(skip, limit)
-        )
+                Next.fromSkipLimit(skip, limit)
+            )
             .stream()
             .map(entityToDataConverter::toData)
             .collect(Collectors.toList());
     }
 
     public List<BookRawData> getBooks(String nextPageToken, int limit) {
-        if(EzyStrings.isNoContent(nextPageToken)) {
+        if (EzyStrings.isNoContent(nextPageToken)) {
             return getBooks(0, limit);
         }
         String[] strs = nextPageToken.split(":");
         BigInteger priceExclusive = new BigInteger(strs[0]);
         Long bookId = Long.valueOf(strs[1]);
         return bookRepository.findBooks(
-            priceExclusive,
-            bookId,
-            Next.fromSkipLimit(0, limit)
-        )
+                priceExclusive,
+                bookId,
+                Next.fromSkipLimit(0, limit)
+            )
             .stream()
             .map(entityToDataConverter::toData)
             .collect(Collectors.toList());
@@ -134,15 +134,13 @@ public class BookService {
         int size
     ) {
         List<Book> books;
-        if(EzyStrings.isEmpty(upperThan)) {
-            if(EzyStrings.isEmpty(lowerThan)) {
+        if (EzyStrings.isEmpty(upperThan)) {
+            if (EzyStrings.isEmpty(lowerThan)) {
                 books = bookRepository.findBooks(Next.fromSkipLimit(0, size));
-            }
-            else {
+            } else {
                 books = bookRepository.findByNameLt(lowerThan, Next.fromSkipLimit(0, size));
             }
-        }
-        else {
+        } else {
             books = bookRepository.findByNameGt(upperThan, Next.fromSkipLimit(0, size));
         }
         final List<Long> authorIds = books.stream()

@@ -30,15 +30,13 @@ public class LoginController {
         @RequestParam("lastLoginDate") LocalDate lastLoginDate
     ) {
         final User user = userService.getUser(username);
-        if(user != null) {
-            if(user.getPassword().equals(password)) {
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
                 return Redirect.to("/user/" + username);
-            }
-            else {
+            } else {
                 return Redirect.to("/login");
             }
-        }
-        else {
+        } else {
             return Redirect.to("/register");
         }
     }

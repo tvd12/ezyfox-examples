@@ -11,26 +11,26 @@ import com.tvd12.ezyfox.bean.annotation.EzySingleton;
 @EzySingleton
 public class RequestToDataConverter {
 
-	public AddAuthorData toData(AddAuthorRequest request) {
-		return AddAuthorData.builder()
-			.authorName(request.getAuthorName())
-			.build();
-	}
+    public AddAuthorData toData(AddAuthorRequest request) {
+        return AddAuthorData.builder()
+            .authorName(request.getAuthorName())
+            .build();
+    }
 
-	public AddCategoryData toData(AddCategoryRequest request) {
-		return AddCategoryData.builder()
-			.categoryName(request.getCategoryName())
-			.build();
-	}
+    public AddCategoryData toData(AddCategoryRequest request) {
+        return AddCategoryData.builder()
+            .categoryName(request.getCategoryName())
+            .build();
+    }
 
-	public AddBookData toData(AddBookRequest request) {
-		return AddBookData.builder()
-			.bookName(request.getBookName())
-			.authorId(request.getAuthorId())
-			.categoryId(request.getCategoryId())
-			.price(request.getPrice())
-			.releaseDate(request.getReleaseDate())
-			.releaseTime(request.getReleaseTime())
-			.build();
-	}
+    public AddBookData toData(AddBookRequest request) {
+        return AddBookData.builder()
+            .bookName(request.getBookName())
+            .authorId(request.getAuthorId())
+            .categoryId(request.getCategoryId())
+            .price(request.getPrice())
+            .releaseDate(request.getReleaseDate())
+            .releaseTime(request.getReleaseTime())
+            .build();
+    }
 }

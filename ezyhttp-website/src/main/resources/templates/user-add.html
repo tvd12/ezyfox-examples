@@ -3,24 +3,24 @@
     <meta charset="UTF-8">
     <title>Add User</title>
     <!--    semantic ui-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+    <script crossorigin="anonymous"
             integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
           integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+          referrerpolicy="no-referrer" rel="stylesheet"/>
 </head>
 <body>
 <div class="ui text container" style="margin-top: 20px; max-width: 450px">
     <h2>Update user information</h2>
-    <form class="ui form" th:action="@{/api/v1/users/add}" method="post">
+    <form class="ui form" method="post" th:action="@{/api/v1/users/add}">
         <div class="field">
             <label>Username</label>
-            <input name="username" type="text" placeholder="Username">
+            <input name="username" placeholder="Username" type="text">
         </div>
         <div class="field">
             <label>Password</label>
-            <input name="password" type="password" placeholder="Password">
+            <input name="password" placeholder="Password" type="password">
         </div>
         <button class="ui fluid middle teal submit button" type="submit">Save</button>
     </form>

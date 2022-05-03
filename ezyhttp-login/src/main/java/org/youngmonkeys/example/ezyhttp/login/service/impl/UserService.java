@@ -28,7 +28,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getUserByThirdPartyId(String thirdPartyId) { return userRepository.findByField("thirdPartyId", thirdPartyId); }
+    public User getUserByThirdPartyId(String thirdPartyId) {return userRepository.findByField("thirdPartyId", thirdPartyId);}
 
     @Override
     public User saveGoogleUserInfo(Userinfo googleUserInfo) {

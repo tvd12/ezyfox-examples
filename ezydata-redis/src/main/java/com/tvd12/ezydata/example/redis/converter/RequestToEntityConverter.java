@@ -7,15 +7,15 @@ import com.tvd12.ezyfox.bean.annotation.EzySingleton;
 
 @EzySingleton
 public class RequestToEntityConverter {
-	public Book toBookEntity(AddBookRequest request, Long bookId) {
-	    return new Book(
-	        bookId,
-	        request.getCategoryId(),
-	        request.getAuthorId(),
-	        request.getBookName(),
-	        request.getPrice(),
-	        DateConverter.toLocalDate(request.getReleaseDate()),
-	        DateConverter.toLocalDateTime(request.getReleaseTime())
-	    );
-	}
+    public Book toBookEntity(AddBookRequest request, Long bookId) {
+        return new Book(
+            bookId,
+            request.getCategoryId(),
+            request.getAuthorId(),
+            request.getBookName(),
+            request.getPrice(),
+            DateConverter.toLocalDate(request.getReleaseDate()),
+            DateConverter.toLocalDateTime(request.getReleaseTime())
+        );
+    }
 }

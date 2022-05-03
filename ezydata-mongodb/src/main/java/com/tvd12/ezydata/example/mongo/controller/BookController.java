@@ -1,11 +1,5 @@
 package com.tvd12.ezydata.example.mongo.controller;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import com.tvd12.ezydata.database.repository.EzyMaxIdRepository;
 import com.tvd12.ezydata.example.mongo.converter.EntityToResponseConverter;
 import com.tvd12.ezydata.example.mongo.converter.RequestToEntityConverter;
@@ -22,9 +16,14 @@ import com.tvd12.ezyfox.util.Next;
 import com.tvd12.ezyhttp.core.exception.HttpBadRequestException;
 import com.tvd12.ezyhttp.core.exception.HttpNotFoundException;
 import com.tvd12.ezyhttp.server.core.annotation.*;
-
 import lombok.AllArgsConstructor;
 import lombok.val;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Controller("/api/v1")
@@ -32,7 +31,7 @@ public class BookController {
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
-    private final EzyMaxIdRepository maxIdRepository; 
+    private final EzyMaxIdRepository maxIdRepository;
     private final EntityToResponseConverter entityToResponseConverter;
     private final RequestToEntityConverter requestToEntityConverter;
 
@@ -44,21 +43,21 @@ public class BookController {
         );
         if (existedBook != null) {
             throw new HttpBadRequestException(
-                "author: " + request.getAuthorId() + 
-                " has already registered book: " + request.getBookName()
+                "author: " + request.getAuthorId() +
+                    " has already registered book: " + request.getBookName()
             );
         }
         Author author = authorRepository.findById(request.getAuthorId());
         if (author == null) {
-        	throw new HttpBadRequestException(
-                    "author: " + request.getAuthorId() + " not found"
-                );
+            throw new HttpBadRequestException(
+                "author: " + request.getAuthorId() + " not found"
+            );
         }
         Category category = categoryRepository.findById(request.getCategoryId());
         if (category == null) {
-        	throw new HttpBadRequestException(
-                    "category: " + request.getCategoryId() + " not found"
-                );
+            throw new HttpBadRequestException(
+                "category: " + request.getCategoryId() + " not found"
+            );
         }
 
         val bookId = maxIdRepository.incrementAndGet("book");
@@ -70,13 +69,13 @@ public class BookController {
     @DoGet("/books/{bookId}")
     public BookResponse getBook(@PathVariable Long bookId) {
         Book book = bookRepository.findById(bookId);
-        if(book == null) {
+        if (book == null) {
             throw new HttpNotFoundException("not found book with id: " + bookId);
         }
         Author author = authorRepository.findById(book.getAuthorId());
         Category category = categoryRepository.findById(book.getCategoryId());
         return entityToResponseConverter.toBookResponse(
-        	book,
+            book,
             author,
             category
         );
@@ -89,14 +88,13 @@ public class BookController {
         @RequestParam("size") int size
     ) {
         List<Book> books = null;
-        if(EzyStrings.isEmpty(upperThan)) {
+        if (EzyStrings.isEmpty(upperThan)) {
             books = EzyStrings.isEmpty(lowerThan)
                 ? bookRepository.findBooks(Next.fromSkipLimit(0, size))
                 : bookRepository.findByNameLt(lowerThan, Next.fromSkipLimit(0, size));
+        } else {
+            books = bookRepository.findByNameGt(upperThan, Next.fromSkipLimit(0, size));
         }
-    	else {
-    		books = bookRepository.findByNameGt(upperThan, Next.fromSkipLimit(0, size));
-    	}
         return decorateBooksToResponse(books);
     }
 

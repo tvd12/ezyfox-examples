@@ -41,13 +41,13 @@ public class LoginController {
         User user = userService.getUserInfoByEmail(loginRequest.getEmail());
         if (user != null) {
             String hashPassword = EzySHA256.cryptUtfToLowercase(loginRequest.getPassword());
-             if (hashPassword.equals(user.getPassword())) {
-                 String accessToken = authenticationService.generateAccessToken(user.getId());
-                 return Redirect.builder()
-                     .addCookie("accessToken", accessToken)
-                     .uri("/home")
-                     .build();
-             }
+            if (hashPassword.equals(user.getPassword())) {
+                String accessToken = authenticationService.generateAccessToken(user.getId());
+                return Redirect.builder()
+                    .addCookie("accessToken", accessToken)
+                    .uri("/home")
+                    .build();
+            }
         }
         return Redirect.to("/login-error");
     }
@@ -79,13 +79,13 @@ public class LoginController {
         String accessToken = authenticationService.generateAccessToken(user.getId());
         return userExisted && user.getStatus() == UserStatus.UPDATED
             ? Redirect.builder()
-                .uri("/home")
-                .addCookie("accessToken", accessToken)
-                .build()
+            .uri("/home")
+            .addCookie("accessToken", accessToken)
+            .build()
             : Redirect.builder()
-                .uri("/user/update")
-                .addCookie("accessToken", accessToken)
-                .build();
+            .uri("/user/update")
+            .addCookie("accessToken", accessToken)
+            .build();
     }
 
     @DoGet("/facebook-login-callback")
@@ -107,14 +107,14 @@ public class LoginController {
         }
         String accessToken = authenticationService.generateAccessToken(user.getId());
         return userExisted && user.getStatus() == UserStatus.UPDATED
-                ? Redirect.builder()
-                    .uri("/home")
-                    .addCookie("accessToken", accessToken)
-                    .build()
-                : Redirect.builder()
-                    .uri("/user/update")
-                    .addCookie("accessToken", accessToken)
-                    .build();
+            ? Redirect.builder()
+            .uri("/home")
+            .addCookie("accessToken", accessToken)
+            .build()
+            : Redirect.builder()
+            .uri("/user/update")
+            .addCookie("accessToken", accessToken)
+            .build();
     }
 
     @DoPost("/logout")

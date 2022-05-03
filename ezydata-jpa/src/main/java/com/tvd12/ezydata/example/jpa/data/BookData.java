@@ -1,6 +1,7 @@
 package com.tvd12.ezydata.example.jpa.data;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,11 +1,11 @@
 package com.tvd12.ezydata.example.jpa.response;
 
+import lombok.Builder;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import lombok.Builder;
-import lombok.Getter;
 
 @Getter
 @Builder

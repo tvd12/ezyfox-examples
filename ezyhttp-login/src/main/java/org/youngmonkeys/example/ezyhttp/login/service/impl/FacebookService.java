@@ -2,8 +2,8 @@ package org.youngmonkeys.example.ezyhttp.login.service.impl;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
-import com.restfb.types.User;
 import com.restfb.Version;
+import com.restfb.types.User;
 import com.tvd12.ezyfox.annotation.EzyProperty;
 import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
@@ -25,22 +25,17 @@ import java.util.Map;
 @EzySingleton
 public class FacebookService extends EzyLoggable implements IFacebookService {
 
+    private static final int DEFAULT_GOOGLE_AUTH_TIMEOUT = 15 * 1000;
     @EzyProperty("facebook.client_id")
     private String clientId;
-
     @EzyProperty("facebook.client_secret")
     private String clientSecret;
-
     @EzyProperty("facebook.redirect_uri")
     private String redirectUri;
-
     @EzyProperty("facebook.get_token_url")
     private String getTokenUri;
-
     @EzyAutoBind
     private HttpClientProxy httpClientProxy;
-
-    private static final int DEFAULT_GOOGLE_AUTH_TIMEOUT = 15 * 1000;
 
     @Override
     public User getUserInfoByAccessToken(String accessToken) {
@@ -52,25 +47,24 @@ public class FacebookService extends EzyLoggable implements IFacebookService {
     @Override
     public String getAccessToken(String code) {
         Map<String, Object> requestBody = EzyMapBuilder.mapBuilder()
-                .put("client_id", clientId)
-                .put("client_secret", clientSecret)
-                .put("redirect_uri", redirectUri)
-                .put("code", code)
-                .build();
+            .put("client_id", clientId)
+            .put("client_secret", clientSecret)
+            .put("redirect_uri", redirectUri)
+            .put("code", code)
+            .build();
         PostRequest request = new PostRequest()
-                .setURL(getTokenUri)
-                .setEntity(
-                        RequestEntity.builder()
-                                .contentType(ContentTypes.APPLICATION_X_WWW_FORM_URLENCODED)
-                                .body(requestBody)
-                                .build()
-                )
-                .setResponseType(Map.class);
+            .setURL(getTokenUri)
+            .setEntity(
+                RequestEntity.builder()
+                    .contentType(ContentTypes.APPLICATION_X_WWW_FORM_URLENCODED)
+                    .body(requestBody)
+                    .build()
+            )
+            .setResponseType(Map.class);
         try {
             Map<String, Object> response = httpClientProxy.call(request, DEFAULT_GOOGLE_AUTH_TIMEOUT);
             return (String) response.get("access_token");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.info("get facebook access token error", e);
             return null;
         }

@@ -9,7 +9,7 @@ public class BytesPrinter {
         System.out.println(Arrays.toString(ByteBuffer.allocate(4).putInt(300).array()));
         System.out.println(Arrays.toString(ByteBuffer.allocate(4).putInt(100).array()));
 
-        ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[] {0, 1, 44, 100});
+        ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[]{0, 1, 44, 100});
         System.out.println(byteBuffer.getInt());
     }
 

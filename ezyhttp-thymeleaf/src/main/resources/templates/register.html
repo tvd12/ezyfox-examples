@@ -3,19 +3,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Register View</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <title>Register View</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
 </head>
 
 <body>
 <div class="container">
-  <form action="/register" method="post">
-    <input name="username" placeholder="Username" value="DungTV" />
-    <input name="password" placeholder="Password" value="12345678" />
-    <input name="birthOfDate" placeholder="Last login date" value="2021-08-31" />
-    <button type="submit">Register</button>
-  </form>
+    <form action="/register" method="post">
+        <input name="username" placeholder="Username" value="DungTV"/>
+        <input name="password" placeholder="Password" value="12345678"/>
+        <input name="birthOfDate" placeholder="Last login date" value="2021-08-31"/>
+        <button type="submit">Register</button>
+    </form>
 </div>
 </body>
 
