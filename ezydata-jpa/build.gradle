@@ -4,6 +4,6 @@ dependencies {
     implementation 'com.tvd12:ezyfox-boot-autoconfigure:' + ezyfoxBootVersion
     implementation 'com.tvd12:ezyhttp-server-boot:' + ezyhttpVersion
     implementation 'javax.persistence:javax.persistence-api:2.2'
-    implementation 'org.hibernate:hibernate-core:5.4.27.Final'
-    implementation 'mysql:mysql-connector-java:8.0.22'
+    implementation 'org.hibernate:hibernate-core:5.6.8.Final'
+    implementation 'mysql:mysql-connector-java:8.0.29'
 }
