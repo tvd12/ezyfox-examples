@@ -1,5 +1,0 @@
-apply from: '../build-ezyfox.gradle'
-
-dependencies {
-    implementation 'com.tvd12:ezyhttp-server-boot:' + ezyhttpVersion
-}

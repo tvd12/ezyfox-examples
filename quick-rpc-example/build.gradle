@@ -1,0 +1,4 @@
+dependencies {
+    implementation 'com.tvd12:quick-rpc-client:' + quickRpcVersion
+    implementation 'com.tvd12:quick-rpc-server:' + quickRpcVersion
+}
