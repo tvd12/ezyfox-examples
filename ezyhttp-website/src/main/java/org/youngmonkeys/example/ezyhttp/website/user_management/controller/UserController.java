@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.youngmonkeys.example.ezyhttp.website.user_management.entity.User;
 import org.youngmonkeys.example.ezyhttp.website.user_management.service.UserService;
 @Setter
-@Controller("api/v1/users")
+@Controller("/users")
 public class UserController {
     @EzyAutoBind
     protected UserService userService;
