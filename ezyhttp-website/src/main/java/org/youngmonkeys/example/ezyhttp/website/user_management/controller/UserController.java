@@ -10,9 +10,8 @@ import org.youngmonkeys.example.ezyhttp.website.user_management.entity.User;
 import org.youngmonkeys.example.ezyhttp.website.user_management.service.UserService;
 
 @Setter
-@Controller("api/v1/users")
+@Controller("/users")
 public class UserController {
-
     @EzyAutoBind
     protected UserService userService;
 
@@ -33,7 +32,8 @@ public class UserController {
     @DoPost("/add")
     public Redirect addUser(@RequestBody User user) {
         userService.addUser(user);
-        return Redirect.builder().uri("/api/v1/users/home")
+        return Redirect.builder()
+            .uri("/api/v1/users/home")
             .addAttribute("username", user.getUsername())
             .build();
     }
