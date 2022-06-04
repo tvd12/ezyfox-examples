@@ -5,9 +5,11 @@ import com.tvd12.ezydata.example.mongo.converter.EntityToResponseConverter;
 import com.tvd12.ezydata.example.mongo.converter.RequestToEntityConverter;
 import com.tvd12.ezydata.example.mongo.entity.Author;
 import com.tvd12.ezydata.example.mongo.entity.Book;
+import com.tvd12.ezydata.example.mongo.entity.BookSummary;
 import com.tvd12.ezydata.example.mongo.entity.Category;
 import com.tvd12.ezydata.example.mongo.repository.AuthorRepository;
 import com.tvd12.ezydata.example.mongo.repository.BookRepository;
+import com.tvd12.ezydata.example.mongo.repository.BookSummaryRepository;
 import com.tvd12.ezydata.example.mongo.repository.CategoryRepository;
 import com.tvd12.ezydata.example.mongo.request.AddBookRequest;
 import com.tvd12.ezydata.example.mongo.response.BookResponse;
@@ -17,10 +19,10 @@ import com.tvd12.ezyhttp.core.exception.HttpBadRequestException;
 import com.tvd12.ezyhttp.core.exception.HttpNotFoundException;
 import com.tvd12.ezyhttp.server.core.annotation.*;
 import lombok.AllArgsConstructor;
-import lombok.val;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,6 +32,7 @@ import java.util.stream.Collectors;
 public class BookController {
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final BookSummaryRepository bookSummaryRepository;
     private final CategoryRepository categoryRepository;
     private final EzyMaxIdRepository maxIdRepository;
     private final EntityToResponseConverter entityToResponseConverter;
@@ -60,9 +63,17 @@ public class BookController {
             );
         }
 
-        val bookId = maxIdRepository.incrementAndGet("book");
-        val book = requestToEntityConverter.toBookEntity(request, bookId);
+        long bookId = maxIdRepository.incrementAndGet("book");
+        Book book = requestToEntityConverter.toBookEntity(request, bookId);
         bookRepository.save(book);
+        bookSummaryRepository.save(
+            new BookSummary(
+                bookId,
+                book,
+                author,
+                Collections.singletonList(category)
+            )
+        );
         return entityToResponseConverter.toBookResponse(book, author, category);
     }
 
@@ -79,6 +90,15 @@ public class BookController {
             author,
             category
         );
+    }
+
+    @DoGet("/books/{bookId}/summary")
+    public BookSummary getBookSummary(@PathVariable Long bookId) {
+        BookSummary book = bookSummaryRepository.findById(bookId);
+        if (book == null) {
+            throw new HttpNotFoundException("not found book with id: " + bookId);
+        }
+        return book;
     }
 
     @DoGet("/books")

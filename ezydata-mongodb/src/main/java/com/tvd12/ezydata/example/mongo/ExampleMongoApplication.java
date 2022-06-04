@@ -7,5 +7,4 @@ public class ExampleMongoApplication {
     public static void main(String[] args) throws Exception {
         EzyHttpApplicationBootstrap.start(ExampleMongoApplication.class);
     }
-
 }

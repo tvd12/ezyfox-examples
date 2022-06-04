@@ -43,6 +43,8 @@ curl --location --request POST 'http://localhost:8080/api/v1/book/add' \
 
 curl --location --request GET 'http://localhost:8080/api/v1/books/1'
 
+curl --location --request GET 'http://localhost:8080/api/v1/books/1/summary'
+
 curl --location --request GET 'http://localhost:8080/api/v1/books?size=30'
 
 curl --location --request GET 'http://localhost:8080/api/v1/books?size=30&lower_than=Kotlin'
