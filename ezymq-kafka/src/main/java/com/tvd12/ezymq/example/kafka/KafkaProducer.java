@@ -14,9 +14,12 @@ public class KafkaProducer {
             .build();
         EzyKafkaProducer producer = kafkaProxy.getProducer("hello-world");
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.scheduleAtFixedRate(() -> {
-            producer.send("hello", "Hello World");
-        }, 1, 3, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(() ->
+            producer.send("hello", "Hello World"),
+            1,
+            3,
+            TimeUnit.SECONDS
+        );
     }
 
 }
