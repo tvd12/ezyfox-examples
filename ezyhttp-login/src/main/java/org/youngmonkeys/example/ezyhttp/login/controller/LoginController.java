@@ -1,33 +1,25 @@
 package org.youngmonkeys.example.ezyhttp.login.controller;
 
 import com.google.api.services.oauth2.model.Userinfo;
-import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.sercurity.EzySHA256;
 import com.tvd12.ezyhttp.server.core.annotation.*;
 import com.tvd12.ezyhttp.server.core.view.Redirect;
 import com.tvd12.ezyhttp.server.core.view.View;
+import lombok.AllArgsConstructor;
 import org.youngmonkeys.example.ezyhttp.login.entity.User;
 import org.youngmonkeys.example.ezyhttp.login.entity.UserStatus;
 import org.youngmonkeys.example.ezyhttp.login.request.LoginRequest;
 import org.youngmonkeys.example.ezyhttp.login.service.*;
 
 @Controller
+@AllArgsConstructor
 public class LoginController {
 
-    @EzyAutoBind
-    private IUserService userService;
-
-    @EzyAutoBind
-    private IUserDataService userDataService;
-
-    @EzyAutoBind
-    private IGoogleService googleService;
-
-    @EzyAutoBind
-    private IFacebookService facebookService;
-
-    @EzyAutoBind
-    private IAuthenticationService authenticationService;
+    private final IUserService userService;
+    private final IUserDataService userDataService;
+    private final IGoogleService googleService;
+    private final IFacebookService facebookService;
+    private final IAuthenticationService authenticationService;
 
     @DoGet("/login")
     public View loginGet() {
@@ -36,6 +28,7 @@ public class LoginController {
             .build();
     }
 
+    @Authenticated
     @DoPost("/login")
     public Object login(@RequestBody LoginRequest loginRequest) {
         User user = userService.getUserInfoByEmail(loginRequest.getEmail());

@@ -1,47 +1,31 @@
 package org.youngmonkeys.example.ezyhttp.login.interceptor;
 
-import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
-import com.tvd12.ezyfox.collect.Sets;
 import com.tvd12.ezyfox.util.EzyLoggable;
 import com.tvd12.ezyhttp.core.annotation.Interceptor;
+import com.tvd12.ezyhttp.core.constant.HttpMethod;
 import com.tvd12.ezyhttp.server.core.interceptor.RequestInterceptor;
+import com.tvd12.ezyhttp.server.core.manager.RequestURIManager;
 import com.tvd12.ezyhttp.server.core.request.RequestArguments;
+import lombok.AllArgsConstructor;
 import org.youngmonkeys.example.ezyhttp.login.annotation.UserId;
-import org.youngmonkeys.example.ezyhttp.login.controller.HomeController;
-import org.youngmonkeys.example.ezyhttp.login.controller.LoginController;
-import org.youngmonkeys.example.ezyhttp.login.controller.UserController;
 import org.youngmonkeys.example.ezyhttp.login.exception.TokenNotFoundException;
-import org.youngmonkeys.example.ezyhttp.login.request.UpdateUserRequest;
 import org.youngmonkeys.example.ezyhttp.login.service.IAuthenticationService;
 
 import java.lang.reflect.Method;
-import java.util.Set;
 
 @Interceptor
+@AllArgsConstructor
 public class PermissionInterceptor extends EzyLoggable implements RequestInterceptor {
 
-    private final Set<Method> authorizedMethods;
-
-    @EzyAutoBind
-    private IAuthenticationService authenticationService;
-
-    public PermissionInterceptor() {
-        try {
-            authorizedMethods = Sets.newHashSet(
-                HomeController.class.getDeclaredMethod("home", long.class),
-                LoginController.class.getDeclaredMethod("logout", String.class),
-                UserController.class.getDeclaredMethod("userUpdateGet", long.class),
-                UserController.class.getDeclaredMethod("userSavePost", long.class, UpdateUserRequest.class)
-            );
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
-    }
+    private final RequestURIManager requestUriManager;
+    private final IAuthenticationService authenticationService;
 
     @Override
     public boolean preHandle(RequestArguments arguments, Method handler) throws Exception {
         logger.info("request uri: {}", arguments.getRequest().getRequestURI());
-        if (!authorizedMethods.contains(handler)) {
+        HttpMethod method = arguments.getMethod();
+        String uriTemplate = arguments.getUriTemplate();
+        if (requestUriManager.isAuthenticatedURI(method, uriTemplate)) {
             return true;
         }
         String accessToken = arguments.getParameter("accessToken");

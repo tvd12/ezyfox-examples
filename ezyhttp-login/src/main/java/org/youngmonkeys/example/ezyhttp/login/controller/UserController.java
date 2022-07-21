@@ -1,13 +1,10 @@
 package org.youngmonkeys.example.ezyhttp.login.controller;
 
-import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.sercurity.EzySHA256;
-import com.tvd12.ezyhttp.server.core.annotation.Controller;
-import com.tvd12.ezyhttp.server.core.annotation.DoGet;
-import com.tvd12.ezyhttp.server.core.annotation.DoPost;
-import com.tvd12.ezyhttp.server.core.annotation.RequestBody;
+import com.tvd12.ezyhttp.server.core.annotation.*;
 import com.tvd12.ezyhttp.server.core.view.Redirect;
 import com.tvd12.ezyhttp.server.core.view.View;
+import lombok.AllArgsConstructor;
 import org.youngmonkeys.example.ezyhttp.login.annotation.UserId;
 import org.youngmonkeys.example.ezyhttp.login.entity.User;
 import org.youngmonkeys.example.ezyhttp.login.entity.UserStatus;
@@ -16,10 +13,11 @@ import org.youngmonkeys.example.ezyhttp.login.request.UpdateUserRequest;
 import org.youngmonkeys.example.ezyhttp.login.service.IUserService;
 
 @Controller
+@Authenticated
+@AllArgsConstructor
 public class UserController {
 
-    @EzyAutoBind
-    private IUserService userService;
+    private final IUserService userService;
 
     @DoGet("/user/update")
     public View userUpdateGet(@UserId long userId) {
