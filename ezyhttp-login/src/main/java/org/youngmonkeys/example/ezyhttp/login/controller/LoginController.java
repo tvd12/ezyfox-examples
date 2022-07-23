@@ -1,7 +1,7 @@
 package org.youngmonkeys.example.ezyhttp.login.controller;
 
 import com.google.api.services.oauth2.model.Userinfo;
-import com.tvd12.ezyfox.sercurity.EzySHA256;
+import com.tvd12.ezyfox.security.EzySHA256;
 import com.tvd12.ezyhttp.server.core.annotation.*;
 import com.tvd12.ezyhttp.server.core.view.Redirect;
 import com.tvd12.ezyhttp.server.core.view.View;

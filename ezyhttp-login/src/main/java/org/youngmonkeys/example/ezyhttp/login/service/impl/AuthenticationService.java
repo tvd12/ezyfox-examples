@@ -3,7 +3,7 @@ package org.youngmonkeys.example.ezyhttp.login.service.impl;
 import com.tvd12.ezyfox.annotation.EzyProperty;
 import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
-import com.tvd12.ezyfox.sercurity.EzySHA256;
+import com.tvd12.ezyfox.security.EzySHA256;
 import org.youngmonkeys.example.ezyhttp.login.entity.AccessToken;
 import org.youngmonkeys.example.ezyhttp.login.exception.TokenExpiredException;
 import org.youngmonkeys.example.ezyhttp.login.exception.TokenNotFoundException;
