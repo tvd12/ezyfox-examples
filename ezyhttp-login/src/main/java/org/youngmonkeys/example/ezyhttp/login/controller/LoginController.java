@@ -28,19 +28,22 @@ public class LoginController {
             .build();
     }
 
-    @Authenticated
     @DoPost("/login")
     public Object login(@RequestBody LoginRequest loginRequest) {
         User user = userService.getUserInfoByEmail(loginRequest.getEmail());
-        if (user != null) {
-            String hashPassword = EzySHA256.cryptUtfToLowercase(loginRequest.getPassword());
-            if (hashPassword.equals(user.getPassword())) {
-                String accessToken = authenticationService.generateAccessToken(user.getId());
-                return Redirect.builder()
-                    .addCookie("accessToken", accessToken)
-                    .uri("/home")
-                    .build();
-            }
+        String hashPassword = EzySHA256.cryptUtfToLowercase(loginRequest.getPassword());
+        if (user == null) {
+            user = new User();
+            user.setEmail(loginRequest.getEmail());
+            user.setPassword(hashPassword);
+            userService.saveUser(user);
+        }
+        if (hashPassword.equals(user.getPassword())) {
+            String accessToken = authenticationService.generateAccessToken(user.getId());
+            return Redirect.builder()
+                .addCookie("accessToken", accessToken)
+                .uri("/home")
+                .build();
         }
         return Redirect.to("/login-error");
     }
