@@ -1,3 +1,4 @@
+include ':ezyfox-util'
 include ':ezydata-common'
 include ':ezydata-jpa'
 include ':ezydata-mongodb'
